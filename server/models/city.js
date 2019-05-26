@@ -4,7 +4,7 @@ const PlaceSchema = require('./place');
 
 const citySchema = new Schema(
     {
-        name: { type: String, required: true },
+        name: { type: String, required: true, trim: true },
         places: [PlaceSchema]
     }
 );

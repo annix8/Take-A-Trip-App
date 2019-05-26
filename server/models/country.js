@@ -4,7 +4,7 @@ const CitySchema = require('./city');
 
 const countrySchema = new Schema(
     {
-        name: { type: String, required: true },
+        name: { type: String, required: true, trim: true },
         cities: [CitySchema]
     }
 );
