@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const CitySchema = require('./city');
+const Schema = mongoose.Schema;
 
 const countrySchema = new Schema(
     {
