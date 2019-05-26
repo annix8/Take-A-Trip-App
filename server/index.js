@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const router = require('./router');
 
 const port = 3200;
 const server = express();
@@ -18,8 +19,10 @@ class Server {
 
     initRoutes() {
         server.get('/', (req, res) => {
-            res.send("Server is working");
+            res.send("Server is working...");
         });
+
+        router.loadRoutes(server, './controllers');
     }
 }
 
