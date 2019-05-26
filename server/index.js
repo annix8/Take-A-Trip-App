@@ -4,10 +4,23 @@ const mongoose = require('mongoose');
 const port = 3200;
 const server = express();
 
-server.get('/', (req, res) => {
-    res.send("Server is working");
-});
+class Server {
+    constructor() {
+        this.initRoutes();
+        this.start();
+    }
 
-server.listen(port, () => {
-    console.log(`Server listening on port ${port}...`);
-});
+    start() {
+        server.listen(port, () => {
+            console.log(`Server listening on port ${port}...`);
+        });
+    }
+
+    initRoutes() {
+        server.get('/', (req, res) => {
+            res.send("Server is working");
+        });
+    }
+}
+
+const appServer = new Server();
