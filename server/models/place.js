@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ImageSchema = require('./image');
+const ImageSchema = require('./image').schema;
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema(
