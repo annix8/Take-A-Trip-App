@@ -44,6 +44,7 @@ class DbSeeder {
             let city = new City({ name: element.city });
             element.places.forEach(place => {
                 let currPlace = new Place(place);
+                currPlace.save();
                 city.places.push(currPlace);
             });
 
