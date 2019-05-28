@@ -1,21 +1,24 @@
-const City = require('../../../models/city');
+const cityRepository = require('../../../repositories/city.repository');
 const util = require('../../../util');
 
 class CityController {
     constructor(router) {
         router.get('/', this.getAll.bind(this));
         router.get('/:id', this.getById.bind(this));
-        router.get('/:name', this.getByName.bind(this));
+        router.get('/name/:name', this.getByName.bind(this));
     }
 
     getAll(req, res) {
-        City.find((err, cities) => {
-            return util.handleResponse(res, err, cities);
+        cityRepository.get({}, (err, city) => {
+            return util.handleResponse(res, err, city);
         });
     }
 
-    getById(req, res){
-        City.findById(req.params.id, (err, city) => {
+    getById(req, res) {
+        const query = {
+            _id: req.params.id
+        };
+        cityRepository.get(query, (err, city) => {
             return util.handleResponse(res, err, city);
         })
     }
@@ -24,7 +27,7 @@ class CityController {
         const query = {
             name: req.params.name
         };
-        City.find(query, (err, cities) => {
+        cityRepository.get(query, (err, cities) => {
             return util.handleResponse(res, err, cities);
         });
     }
