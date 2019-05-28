@@ -25,7 +25,7 @@ class CityController {
 
     getByName(req, res) {
         const query = {
-            name: req.params.name
+            name: { "$regex": req.params.name, "$options": "i" }
         };
         cityRepository.get(query, (err, cities) => {
             return util.handleResponse(res, err, cities);
