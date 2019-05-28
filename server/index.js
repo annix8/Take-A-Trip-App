@@ -11,7 +11,7 @@ class Server {
     constructor() {
         this.initRoutes();
         this.start();
-        // dbSeeder.seed();
+        dbSeeder.seed();
     }
 
     start() {

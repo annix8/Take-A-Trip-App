@@ -28,16 +28,15 @@ const data = [
 
 class DbSeeder {
     seed() {
-        // mongoose.connection.collection("cities", (err, collection) =>{
-        //     if(err){
-        //         console.log(err);
-        //     }
-        //     if(!collection){
-        //         console.log("No cities")
-        //         this.seedData();
-        //     }
-        // });
-        this.seedData();
+        City.find((err, cities) =>{
+            if(err){
+                console.log(err);
+            }
+
+            if(cities.length === 0){
+                this.seedData();
+            }
+        });
     }
 
     seedData() {
