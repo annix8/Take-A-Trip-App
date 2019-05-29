@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ICity } from 'src/app/models/city';
+import { CityService } from 'src/app/services/city.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,17 +10,17 @@ import { ICity } from 'src/app/models/city';
 export class WelcomeComponent implements OnInit {
   cities: ICity[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private cityService: CityService) { }
 
   ngOnInit() {
   }
 
   loadTestData() {
-    const citiesUrl = "http://localhost:3200/api/cities";
-    this.http.get<ICity[]>(citiesUrl).subscribe(cities => this.cities = cities);
+    this.cityService.getAll(true)
+      .subscribe(cities => this.cities = cities);
   }
 
-  hideTestData(){
+  hideTestData() {
     this.cities = [];
   }
 }

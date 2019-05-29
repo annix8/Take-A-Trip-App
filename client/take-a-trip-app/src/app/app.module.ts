@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
