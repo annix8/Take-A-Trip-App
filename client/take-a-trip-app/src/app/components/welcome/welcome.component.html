@@ -1,3 +1,17 @@
 <div class="alert alert-success" role="alert">
   Welcome to Take-a-Trip application
 </div>
+
+<button class="btn btn-primary" (click)="loadTestData()">Load test data</button> &nbsp;
+<button class="btn btn-primary" *ngIf="cities && cities.length > 0" (click)="hideTestData()">Hide test data</button>
+
+<ul *ngIf="cities && cities.length > 0">
+  <li *ngFor="let city of cities">
+    <p>{{city.name}}</p>
+    <ul *ngIf="city.places && city.places.length > 0">
+      <li *ngFor="let place of city.places">
+        <p>{{place.name}}</p>
+      </li>
+    </ul>
+  </li>
+</ul>
