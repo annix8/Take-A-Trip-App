@@ -12,7 +12,7 @@ class CityController {
     getAll(req, res) {
         const queryObj = new MongooseQueryObject(
             {},
-            getExcludeParams(req)
+            util.getExcludeParams(req)
         );
         cityRepository.get(queryObj, (err, city) => {
             return util.handleResponse(res, err, city);
@@ -22,7 +22,7 @@ class CityController {
     getById(req, res) {
         const queryObj = new MongooseQueryObject(
             { _id: req.params.id },
-            getExcludeParams(req)
+            util.getExcludeParams(req)
         );
         cityRepository.get(queryObj, (err, city) => {
             return util.handleResponse(res, err, city);
@@ -32,24 +32,12 @@ class CityController {
     getByName(req, res) {
         const queryObj = new MongooseQueryObject(
             { name: { "$regex": req.params.name, "$options": "i" } },
-            getExcludeParams(req)
+            util.getExcludeParams(req)
         );
         cityRepository.get(queryObj, (err, cities) => {
             return util.handleResponse(res, err, cities);
         });
     }
-}
-
-function getExcludeParams(request) {
-    let excludeParams = [];
-    if (request.query.exclude) {
-        excludeParams = request.query.exclude
-            .replace(/\s/g, '')
-            .split(',')
-            .map(x => `-${x}`);
-    }
-
-    return excludeParams;
 }
 
 module.exports = CityController;
