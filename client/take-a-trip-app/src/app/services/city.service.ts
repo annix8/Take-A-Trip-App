@@ -22,12 +22,16 @@ export class CityService {
       );
   }
 
-  getAllByName(cityName: string): Observable<ICity[]>{
+  getAllByName(cityName: string): Observable<ICity[]> {
+    if (!cityName.trim()) {
+      return of([]);
+    }
+
     const citiesUrl = this.baseUrl + "/cities/name/" + cityName;
     return this.http.get<ICity[]>(citiesUrl)
-    .pipe(
-      catchError(this.handleError<ICity[]>("Get cities by name", []))
-    );
+      .pipe(
+        catchError(this.handleError<ICity[]>("Get cities by name", []))
+      );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
