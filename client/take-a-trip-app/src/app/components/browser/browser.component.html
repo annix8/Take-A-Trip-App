@@ -1,9 +1,9 @@
 <h4><label for="search-box">Where are you travelling to?</label></h4>
 
-<input type="text" #browseInput (input)="browse(browseInput.value)" />
+<input type="text" class="form-control" #browseInput (input)="browse(browseInput.value)" />
 
-<ul class="browse-result">
-  <li *ngFor="let city of cities$ | async">
+<ul class="browse-result list group">
+  <li *ngFor="let city of cities$ | async" class="list-group-item">
     {{city.name}}
   </li>
 </ul>

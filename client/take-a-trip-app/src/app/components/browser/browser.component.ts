@@ -17,7 +17,7 @@ export class BrowserComponent implements OnInit {
 
   ngOnInit() {
     this.cities$ = this.browseTerms.pipe(
-      debounceTime(500),
+      debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.cityService.getAllByName(term))
     );
