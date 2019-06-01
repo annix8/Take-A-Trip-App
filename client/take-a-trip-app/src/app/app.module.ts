@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { BrowserComponent } from './components/browser/browser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    BrowserComponent
   ],
   imports: [
     BrowserModule,

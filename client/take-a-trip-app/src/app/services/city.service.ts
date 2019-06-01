@@ -23,7 +23,7 @@ export class CityService {
   }
 
   getAllByName(cityName: string): Observable<ICity[]>{
-    const citiesUrl = this.baseUrl + "/cities";
+    const citiesUrl = this.baseUrl + "/cities/name/" + cityName;
     return this.http.get<ICity[]>(citiesUrl)
     .pipe(
       catchError(this.handleError<ICity[]>("Get cities by name", []))
