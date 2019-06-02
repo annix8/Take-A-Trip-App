@@ -5,7 +5,11 @@ const Schema = mongoose.Schema;
 const citySchema = new Schema(
     {
         name: { type: String, required: true, trim: true },
-        places: [PlaceSchema]
+        places: [PlaceSchema],
+        country: {
+            _id: { type: Schema.Types.ObjectId, ref: 'Country' },
+            name: { type: String }
+        }
     }
 );
 

@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
-const CitySchema = require('./city').schema;
 const Schema = mongoose.Schema;
 
 const countrySchema = new Schema(
     {
         name: { type: String, required: true, trim: true },
-        cities: [CitySchema]
+        cities: [
+            {
+                _id: { type: Schema.Types.ObjectId, ref: 'City' },
+                name: { type: String }
+            }
+        ]
     }
 );
 
