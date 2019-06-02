@@ -34,6 +34,14 @@ export class CityService {
       );
   }
 
+  getById(cityId: string): Observable<ICity>{
+    const cityUrl = this.baseUrl + "/cities/" + cityId;
+    return this.http.get<ICity>(cityUrl)
+    .pipe(
+      catchError(this.handleError<ICity>("Get city by id", null))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
