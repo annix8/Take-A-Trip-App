@@ -10,13 +10,13 @@ class PlaceController {
 
     getAll(req, res) {
         placeRepository.get({}, (err, places) => {
-            return util.handleResponse(res, err, places);
+            return util.handleJsonResponse(res, err, places);
         });
     }
 
     getById(req, res) {
         placeRepository.get({ _id: req.params.id }, (err, place) => {
-            return util.handleResponse(res, err, place);
+            return util.handleJsonResponse(res, err, place);
         });
     }
 
@@ -25,7 +25,7 @@ class PlaceController {
             name: { "$regex": req.params.name, "$options": "i" }
         };
         placeRepository.get(query, (err, places) => {
-            return util.handleResponse(res, err, places);
+            return util.handleJsonResponse(res, err, places);
         });
     }
 }

@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const City = require('../models/city');
 const Place = require('../models/place');
 const Country = require('../models/country');
+const Image = require('../models/image');
+const fs = require('fs');
 
 const countryData = [
     "Bulgaria", "Spain", "England", "Germany", "France", "Portugal", "Italy"
@@ -10,18 +12,18 @@ const cityData = [
     {
         city: "Sofia",
         places: [
-            { name: "Sveti Aleksandar Nevski", address: "Sofia center" },
-            { name: "National Palace of Culture", address: "Sofia 10" },
-            { name: "Zoo", address: "Sofia Hladilnika" }
+            { name: "Saint Alexander Nevsky Cathedral", address: "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia", imgs: ["/images/nevski-cathedral-1.jpg", "/images/nevski-cathedral-1.jpg"] },
+            { name: "National Palace of Culture", address: "Sofia 10", imgs: [] },
+            { name: "Zoo", address: "Sofia Hladilnika", imgs: [] }
         ],
         country: "Bulgaria"
     },
     {
         city: "Pernik",
         places: [
-            { name: "Palace of Culture", address: "Pernik center" },
-            { name: "Minyor Pernik Stadium", address: "Pernik 52" },
-            { name: "Pernik park", address: "Pernik 50" }
+            { name: "Palace of Culture", address: "Pernik center", imgs: [] },
+            { name: "Minyor Pernik Stadium", address: "Pernik 52", imgs: [] },
+            { name: "Pernik park", address: "Pernik 50", imgs: [] }
         ],
         country: "Bulgaria"
     },
@@ -84,7 +86,17 @@ function seedCities() {
                 name: country.name
             };
             element.places.forEach(place => {
+                const placeImages = [];
+                place.imgs.forEach(imgPath =>{
+                    const imgFullPath = __dirname + imgPath;
+                    const file = fs.readFileSync(imgFullPath);
+                    const imageModel = new Image({file: file, contentType: 'image/png'});
+                    imageModel.save();
+
+                    placeImages.push({_id: imageModel._id});
+                });
                 let currPlace = new Place(place);
+                currPlace.images = placeImages;
                 currPlace.save();
                 city.places.push(currPlace);
             });

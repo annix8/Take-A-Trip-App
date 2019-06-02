@@ -14,7 +14,7 @@ class CountryController {
             util.getExcludeParams(req)
         );
         countryRepository.get(queryObj, (err, city) => {
-            return util.handleResponse(res, err, city);
+            return util.handleJsonResponse(res, err, city);
         });
     }
 }

@@ -1,10 +1,18 @@
 class Util {
-    handleResponse(res, err, data) {
+    handleJsonResponse(res, err, data) {
         if (err) {
             return res.send(err);
         }
 
         return res.json(data);
+    }
+
+    handleFileResponse(res, err, data) {
+        if (err) {
+            return res.send(err);
+        }
+
+        return res.end(data, 'binary');
     }
 
     getExcludeParams(request) {
