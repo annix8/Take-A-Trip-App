@@ -8,6 +8,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserComponent } from './components/browser/browser.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
+import { PlaceDetailsComponent } from './components/place-details/place-details.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CityDetailsComponent } from './components/city-details/city-details.com
     WelcomeComponent,
     NotFoundComponent,
     BrowserComponent,
-    CityDetailsComponent
+    CityDetailsComponent,
+    PlaceDetailsComponent
   ],
   imports: [
     BrowserModule,
