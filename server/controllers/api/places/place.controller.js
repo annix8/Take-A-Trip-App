@@ -15,12 +15,12 @@ class PlaceController {
     }
 
     getById(req, res) {
-        placeRepository.get({ _id: req.params.id }, (err, place) => {
-            return util.handleJsonResponse(res, err, place);
+        placeRepository.get({ _id: req.params.id }, (err, places) => {
+            return util.handleJsonResponse(res, err, places[0]);
         });
     }
 
-    getByName(req, res){
+    getByName(req, res) {
         const query = {
             name: { "$regex": req.params.name, "$options": "i" }
         };

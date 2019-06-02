@@ -15,7 +15,7 @@ export class PlaceService {
   constructor(private http: HttpClient) { }
 
   getById(placeId: string): Observable<IPlace> {
-    const placeUrl = this.apiUrl + `/${placeId}`;
+    const placeUrl = this.apiUrl + "/places/" + placeId;
     return this.http.get<IPlace>(placeUrl)
       .pipe(
         catchError(handleHttpError<IPlace>("Get place by id", null))

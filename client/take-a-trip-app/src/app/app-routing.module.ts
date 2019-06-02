@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
+import { PlaceDetailsComponent } from './components/place-details/place-details.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: WelcomeComponent },
   { path: "city/:id", component: CityDetailsComponent },
+  { path: "place/:id", component: PlaceDetailsComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

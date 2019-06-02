@@ -16,7 +16,7 @@ export class CityDetailsComponent implements OnInit {
   ngOnInit() {
     const cityId: string = this.activatedRoute.snapshot.paramMap.get("id");
     this.cityService.getById(cityId)
-      .subscribe(city => {console.log(city);this.city = city});
+      .subscribe(city => this.city = city);
   }
 
 }
