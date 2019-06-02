@@ -14,7 +14,7 @@ export class CityService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(includePlaces: boolean = false): Observable<ICity[]> {
+  getAll(): Observable<ICity[]> {
     const citiesUrl = this.baseUrl + "/cities";
 
     return this.http.get<ICity[]>(citiesUrl)
@@ -28,7 +28,7 @@ export class CityService {
       return of([]);
     }
 
-    const citiesUrl = this.baseUrl + "/cities/name/" + cityName;
+    const citiesUrl = this.baseUrl + "/cities/name/" + cityName + "?exclude=places";
     return this.http.get<ICity[]>(citiesUrl)
       .pipe(
         catchError(handleHttpError<ICity[]>("Get cities by name", []))
