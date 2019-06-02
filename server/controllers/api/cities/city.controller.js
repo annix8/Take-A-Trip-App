@@ -25,7 +25,7 @@ class CityController {
             util.getExcludeParams(req)
         );
         cityRepository.get(queryObj, (err, city) => {
-            return util.handleResponse(res, err, city);
+            return util.handleResponse(res, err, city[0]);
         })
     }
 
