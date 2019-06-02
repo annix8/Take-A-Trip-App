@@ -7,13 +7,15 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SharedModule } from './modules/shared/shared.module';
 import { BrowserComponent } from './components/browser/browser.component';
+import { CityDetailsComponent } from './components/city-details/city-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     NotFoundComponent,
-    BrowserComponent
+    BrowserComponent,
+    CityDetailsComponent
   ],
   imports: [
     BrowserModule,

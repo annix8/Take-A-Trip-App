@@ -2,8 +2,7 @@
 
 <input type="text" class="form-control" #browseInput (input)="browse(browseInput.value)" />
 
-<ul class="browse-result list group">
-  <li *ngFor="let city of cities$ | async" class="list-group-item">
-    {{city.name}}
-  </li>
-</ul>
+<div class="list-group">
+  <a *ngFor="let city of cities$ | async" routerLink="/city/{{city._id}}" class="list-group-item list-group-item-action">
+    {{city.name}}</a>
+</div>
