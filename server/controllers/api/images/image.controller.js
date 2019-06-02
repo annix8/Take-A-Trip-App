@@ -1,5 +1,6 @@
 const util = require('../../../util');
 const Image = require('../../../models/image');
+const imageRepository = require('../../../repositories/image.repository');
 
 class ImageController {
     constructor(router) {
@@ -7,7 +8,7 @@ class ImageController {
     }
 
     getById(req, res) {
-        Image.findById(req.params.id, (err, image) => {
+        imageRepository.getById(req.params.id, (err, image) => {
             return util.handleFileResponse(res, err, image.file);
         });
     }
