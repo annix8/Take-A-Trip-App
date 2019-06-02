@@ -12,7 +12,7 @@ const cityData = [
     {
         city: "Sofia",
         places: [
-            { name: "Saint Alexander Nevsky Cathedral", address: "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia", imgs: ["/images/nevski-cathedral-1.jpg", "/images/nevski-cathedral-1.jpg"] },
+            { name: "Saint Alexander Nevsky Cathedral", address: "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia", imgs: ["/images/nevski-cathedral-1.jpg", "/images/nevski-cathedral-2.jpg"] },
             { name: "National Palace of Culture", address: "Sofia 10", imgs: [] },
             { name: "Zoo", address: "Sofia Hladilnika", imgs: [] }
         ],
