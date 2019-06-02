@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ICity } from '../models/city';
+import { handleHttpError } from '../util';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class CityService {
 
     return this.http.get<ICity[]>(citiesUrl)
       .pipe(
-        catchError(this.handleError<ICity[]>("Get cities", []))
+        catchError(handleHttpError<ICity[]>("Get cities", []))
       );
   }
 
@@ -30,7 +31,7 @@ export class CityService {
     const citiesUrl = this.baseUrl + "/cities/name/" + cityName;
     return this.http.get<ICity[]>(citiesUrl)
       .pipe(
-        catchError(this.handleError<ICity[]>("Get cities by name", []))
+        catchError(handleHttpError<ICity[]>("Get cities by name", []))
       );
   }
 
@@ -38,21 +39,7 @@ export class CityService {
     const cityUrl = this.baseUrl + "/cities/" + cityId;
     return this.http.get<ICity>(cityUrl)
     .pipe(
-      catchError(this.handleError<ICity>("Get city by id", null))
+      catchError(handleHttpError<ICity>("Get city by id", null))
     );
-  }
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
-      console.error(error);
-
-      // TODO: better job of transforming error for user consumption
-      console.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
   }
 }
