@@ -4,5 +4,7 @@
 <hr>
 
 <div *ngIf="place && place.images">
-  <img *ngFor="let imageUrl of place.images" src="{{imageUrl}}" class="img-thumbnail" alt="Cinque Terre">
+  <a *ngFor="let imageUrl of place.images" href="{{imageUrl}}" target="_blank">
+    <img  src="{{imageUrl}}" class="img-thumbnail" alt="Cinque Terre">
+  </a>
 </div>
