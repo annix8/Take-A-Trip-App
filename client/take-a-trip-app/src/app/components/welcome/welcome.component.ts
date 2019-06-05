@@ -16,7 +16,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   loadTestData() {
-    this.cityService.getAll(true)
+    this.cityService.getAll()
       .subscribe(cities => this.cities = cities);
   }
 
