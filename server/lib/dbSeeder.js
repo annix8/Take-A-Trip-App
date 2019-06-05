@@ -4,36 +4,9 @@ const Place = require('../models/place');
 const Country = require('../models/country');
 const Image = require('../models/image');
 const fs = require('fs');
-
-const countryData = [
-    "Bulgaria", "Spain", "England", "Germany", "France", "Portugal", "Italy"
-];
-const cityData = [
-    {
-        city: "Sofia",
-        places: [
-            { name: "Saint Alexander Nevsky Cathedral", address: "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia", imgs: ["/images/nevski-cathedral-1.jpg", "/images/nevski-cathedral-2.jpg"] },
-            { name: "National Palace of Culture", address: "Sofia 10", imgs: [] },
-            { name: "Zoo", address: "Sofia Hladilnika", imgs: [] }
-        ],
-        country: "Bulgaria"
-    },
-    {
-        city: "Pernik",
-        places: [
-            { name: "Palace of Culture", address: "Pernik center", imgs: [] },
-            { name: "Minyor Pernik Stadium", address: "Pernik 52", imgs: [] },
-            { name: "Pernik park", address: "Pernik 50", imgs: [] }
-        ],
-        country: "Bulgaria"
-    },
-    {
-        city: "Burgas",
-        places: [
-        ],
-        country: "Bulgaria"
-    }
-];
+const https = require('https');
+const countryData = require('./seed-data-constants').countryData;
+const cityData = require('./seed-data-constants').cityData;
 
 class DbSeeder {
     seed() {
@@ -49,13 +22,31 @@ class DbSeeder {
     }
 
     seedData() {
-        seedCountries();
-        setTimeout(seedCities, 5000);
+        seedCountriesFromApi();
+        setTimeout(seedCities, 8000);
     }
 }
 
-function seedCountries() {
-    countryData.forEach(country => {
+function seedCountriesFromApi() {
+    var req = https.get('https://restcountries.eu/rest/v2/all', function (res) {        
+        var bodyChunks = [];
+        res.on('data', function (chunk) {
+            bodyChunks.push(chunk);
+        }).on('end', function () {
+            var body = Buffer.concat(bodyChunks);
+            const countryNames = JSON.parse(body).map(x => x.name);
+            seedCountries(countryNames);
+        });
+    });
+
+    req.on('error', function (e) {
+        console.log('ERROR: ' + e.message);
+        seedCountries();
+    });
+}
+
+function seedCountries(countryNames = countryData) {
+    countryNames.forEach(country => {
         const countryModel = new Country({
             name: country
         });
@@ -70,7 +61,7 @@ function seedCities() {
             let city = new City({ name: element.city });
             let country;
             if (countryResult) {
-                country = countryResult; // because find returns an array
+                country = countryResult;
                 country.cities.push({
                     _id: city._id,
                     name: city.name
@@ -87,13 +78,13 @@ function seedCities() {
             };
             element.places.forEach(place => {
                 const placeImages = [];
-                place.imgs.forEach(imgPath =>{
+                place.imgs.forEach(imgPath => {
                     const imgFullPath = __dirname + imgPath;
                     const file = fs.readFileSync(imgFullPath);
-                    const imageModel = new Image({file: file, contentType: 'image/png'});
+                    const imageModel = new Image({ file: file, contentType: 'image/png' });
                     imageModel.save();
 
-                    placeImages.push({_id: imageModel._id});
+                    placeImages.push({ _id: imageModel._id });
                 });
                 let currPlace = new Place(place);
                 currPlace.images = placeImages;

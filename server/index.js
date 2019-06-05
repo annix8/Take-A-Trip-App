@@ -16,7 +16,7 @@ class Server {
         dbSeeder.seed();
     }
 
-    configureCors(){
+    configureCors() {
         server.use(cors({
             origin: "http://localhost:4200",
             optionsSuccessStatus: 200
