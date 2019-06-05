@@ -1,7 +1,3 @@
-const countryData = [
-    "Bulgaria", "Spain", "England", "Germany", "France", "Portugal", "Italy"
-];
-
 const cityData = [
     {
         city: "Sofia",
@@ -30,6 +26,5 @@ const cityData = [
 ];
 
 module.exports = {
-    countryData: countryData,
     cityData: cityData
 }

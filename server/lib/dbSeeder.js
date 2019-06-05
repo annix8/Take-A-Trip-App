@@ -4,7 +4,7 @@ const Country = require('../models/country');
 const Image = require('../models/image');
 const fs = require('fs');
 const https = require('https');
-const countryData = require('./seed-data-constants').countryData;
+const countryData = require('../lib/seed-data/countries.json');
 const cityData = require('./seed-data-constants').cityData;
 
 class DbSeeder {
@@ -21,30 +21,13 @@ class DbSeeder {
     }
 
     seedData() {
-        seedCountriesFromApi();
+        seedCountries();
         setTimeout(seedCities, 8000);
     }
 }
 
-function seedCountriesFromApi() {
-    var req = https.get('https://restcountries.eu/rest/v2/all', function (res) {        
-        var bodyChunks = [];
-        res.on('data', function (chunk) {
-            bodyChunks.push(chunk);
-        }).on('end', function () {
-            var body = Buffer.concat(bodyChunks);
-            const countryNames = JSON.parse(body).map(x => x.name);
-            seedCountries(countryNames);
-        });
-    });
-
-    req.on('error', function (e) {
-        console.log('ERROR: ' + e.message);
-        seedCountries();
-    });
-}
-
-function seedCountries(countryNames = countryData) {
+function seedCountries() {
+    const countryNames = countryData.map(x => x.name);
     countryNames.forEach(country => {
         const countryModel = new Country({
             name: country
@@ -71,10 +54,12 @@ function seedCities() {
             }
 
             country.save();
+
             city.country = {
                 _id: country._id,
                 name: country.name
             };
+
             element.places.forEach(place => {
                 const placeImages = [];
                 place.imgs.forEach(imgPath => {
@@ -85,7 +70,7 @@ function seedCities() {
 
                     placeImages.push({ _id: imageModel._id });
                 });
-                let currPlace = new Place(place);
+                const currPlace = new Place(place);
                 currPlace.images = placeImages;
                 currPlace.save();
                 city.places.push(currPlace);
