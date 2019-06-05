@@ -3,9 +3,8 @@ const Place = require('../models/place');
 const Country = require('../models/country');
 const Image = require('../models/image');
 const fs = require('fs');
-const https = require('https');
 const countryData = require('../lib/seed-data/countries.json');
-const cityData = require('./seed-data-constants').cityData;
+const cityData = require('../lib/seed-data/cities.json');
 
 class DbSeeder {
     seed() {
