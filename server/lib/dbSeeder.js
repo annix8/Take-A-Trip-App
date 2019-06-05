@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const City = require('../models/city');
 const Place = require('../models/place');
 const Country = require('../models/country');
