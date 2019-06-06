@@ -1,4 +1,5 @@
 const Place = require('../models/place');
+const imageRepository = require('../repositories/image.repository');
 
 class PlaceRepository {
     get(query, callback) {
@@ -14,6 +15,21 @@ class PlaceRepository {
 
             callback(err, placesJson);
         });
+    }
+
+    create(place) {
+        const imageIds = imageRepository.createMany(place.images);
+        const placeModel = new Place(
+            {
+                name: place.name,
+                address: place.address,
+                images: imageIds
+            }
+        );
+
+        placeModel.save();
+
+        return placeModel._id;
     }
 }
 

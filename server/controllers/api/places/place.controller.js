@@ -35,8 +35,13 @@ class PlaceController {
     }
 
     create(req, res){
-        console.log(req.body);
-        console.log(req.files);
+        const place = {
+            name: req.body.placeName,
+            address: req.body.placeAddress,
+            cityId: req.body.cityId,
+            images: req.files
+        };
+        console.log(place);
         res.send(req.body);
     }
 }
