@@ -31,6 +31,7 @@ export class PlaceService {
     }
 
     formData.append("placeName", createPlaceModel.placeName);
+    formData.append("placeAddress", createPlaceModel.placeAddress);
     formData.append("cityId", createPlaceModel.cityId);
 
     const createPlaceUrl = this.baseUrl + "/places/create";
