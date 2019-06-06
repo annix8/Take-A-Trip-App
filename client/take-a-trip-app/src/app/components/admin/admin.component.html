@@ -3,27 +3,27 @@
   <form #form="ngForm">
     <div class="form-group">
       <label for="placeName">Name</label>
-      <input type="text" class="form-control" name="placeName" placeholder="Place name..." required>
+      <input type="text" class="form-control" name="placeName" placeholder="Place name..." required
+      [(ngModel)]="placeName" name="placeNameInput">
     </div>
     <div class="form-group">
-        <label for="placeAddress">Address</label>
-        <input type="text" class="form-control" name="placeAddress" placeholder="Place address...">
-      </div>
+      <label for="placeAddress">Address</label>
+      <input type="text" class="form-control" name="placeAddress" placeholder="Place address..."
+      name="placeAddress" [(ngModel)]="placeAddress">
+    </div>
     <div class="form-group">
-        <label for="city">City</label>
-        <select class="form-control" id="city" name="city">
-          <option>Pernik</option>
-          <option>Sofia</option>
-          <option>Burgas</option>
-          <option>Plovdiv</option>
-          <option>Varna</option>
-        </select>
-      </div>
-      <div class="form-group">
-          <label for="imagesInput">Select images...</label>
-          <input type="file" class="form-control-file" id="imagesInput" multiple>
-        </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+      <label for="city">City</label>
+      <select class="form-control" name="selectedCityId" [(ngModel)]="selectedCityId">
+        <option *ngFor="let city of cities$ | async" value="{{city._id}}">
+            {{city.name}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="imagesInput">Select images...</label>
+      <input type="file" class="form-control-file" id="imagesInput" multiple (change)="getFileDetails($event)">
+    </div>
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </form>
 
 </div>
