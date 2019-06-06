@@ -7,10 +7,10 @@ class ImageRepository {
         });
     }
 
-    create(image) {
+    create(imageFile) {
         const image = new Image(
             {
-                file: image
+                file: imageFile
             }
         );
 
@@ -21,11 +21,8 @@ class ImageRepository {
 
     createMany(imageData) {
         const imageIds = [];
-
         for (let i = 0; i < imageData.length; i++) {
-            const image = imageData.image;
-
-            const imageId = this.create(image);
+            const imageId = this.create(imageData[i].buffer);
             imageIds.push(imageId);
         }
 

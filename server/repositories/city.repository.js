@@ -6,6 +6,14 @@ class CityRepository {
             callback(err, cityResponse);
         }).select(mongooseQueryObject.select);
     }
+
+    addPlace(cityId, place, callback){
+        City.findById(cityId, (err, city) =>{
+            city.places.push(place);
+            city.save();
+            callback(err, city);
+        })
+    }
 }
 
 module.exports = new CityRepository();

@@ -1,4 +1,5 @@
 const placeRepository = require('../../../repositories/place.repository');
+const cityRepository = require('../../../repositories/city.repository');
 const util = require('../../../util');
 const multer = require('multer');
 
@@ -41,8 +42,11 @@ class PlaceController {
             cityId: req.body.cityId,
             images: req.files
         };
-        console.log(place);
-        res.send(req.body);
+
+        const newPlace = placeRepository.create(place);
+        cityRepository.addPlace(place.cityId, newPlace, (err, city)=>{
+            return util.handleJsonResponse(res, err, {"success": true});
+        });
     }
 }
 

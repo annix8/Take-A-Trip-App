@@ -18,7 +18,7 @@ class PlaceRepository {
     }
 
     create(place) {
-        const imageIds = imageRepository.createMany(place.images);
+        const imageIds = imageRepository.createMany(place.images).map(x => { return { _id: x._id } });
         const placeModel = new Place(
             {
                 name: place.name,
@@ -29,7 +29,7 @@ class PlaceRepository {
 
         placeModel.save();
 
-        return placeModel._id;
+        return placeModel;
     }
 }
 
