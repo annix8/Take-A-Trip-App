@@ -3,6 +3,7 @@ import { CityService } from 'src/app/services/city.service';
 import { Observable } from 'rxjs';
 import { ICity } from 'src/app/models/city';
 import { ICreatePlace } from 'src/app/models/create-place';
+import { PlaceService } from 'src/app/services/place.service';
 
 @Component({
   templateUrl: './admin.component.html',
@@ -17,7 +18,8 @@ export class AdminComponent implements OnInit {
     pictures: []
   };
 
-  constructor(private cityService: CityService) { }
+  constructor(private cityService: CityService,
+    private placeService: PlaceService) { }
 
   ngOnInit() {
     this.cities$ = this.cityService.getAll();
@@ -32,6 +34,6 @@ export class AdminComponent implements OnInit {
 
   onSubmit() {
     // TODO: Add validation
-    this.cityService.create(this.createPlaceModel);
+    this.placeService.create(this.createPlaceModel);
   }
 }

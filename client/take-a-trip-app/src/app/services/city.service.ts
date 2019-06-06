@@ -5,7 +5,6 @@ import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ICity } from '../models/city';
 import { handleHttpError } from '../util';
-import { ICreatePlace } from '../models/create-place';
 
 @Injectable({
   providedIn: 'root'
@@ -42,16 +41,5 @@ export class CityService {
     .pipe(
       catchError(handleHttpError<ICity>("Get city by id", null))
     );
-  }
-
-  create(createPlaceModel: ICreatePlace){
-    const formData = new FormData();
-
-    for (var i = 0; i < createPlaceModel.pictures.length; i++) {
-      formData.append("pictures", createPlaceModel.pictures[i]);
-    }
-
-    formData.append("placeName", createPlaceModel.placeName);
-    formData.append("cityId", createPlaceModel.cityId);
   }
 }

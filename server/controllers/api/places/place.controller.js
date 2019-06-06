@@ -5,6 +5,7 @@ class PlaceController {
     constructor(router) {
         router.get('/', this.getAll.bind(this));
         router.get('/:id', this.getById.bind(this));
+        router.post('/create', this.create.bind(this));
         router.get('/name/:name', this.getByName.bind(this));
     }
 
@@ -27,6 +28,11 @@ class PlaceController {
         placeRepository.get(query, (err, places) => {
             return util.handleJsonResponse(res, err, places);
         });
+    }
+
+    create(req, res){
+        console.log(req.body);
+        res.send(req.body);
     }
 }
 
