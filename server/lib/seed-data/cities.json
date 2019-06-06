@@ -48,5 +48,70 @@
         "city": "Burgas",
         "places": [],
         "country": "Bulgaria"
+    },
+    {
+        "city": "Plovdiv",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Varna",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Veliko Tarnovo",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Vratsa",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Stara Zagora",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Pleven",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Lovech",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Vidin",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Sandanski",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Pazardzhik",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Gabrovo",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Sliven",
+        "places": [],
+        "country": "Bulgaria"
+    },
+    {
+        "city": "Dobrich",
+        "places": [],
+        "country": "Bulgaria"
     }
 ]
