@@ -1,4 +1,6 @@
 export interface ICreatePlace{
     placeName: string;
-    cityId: string
+    placeAddress: string;
+    cityId: string,
+    pictures: string[];
 }

@@ -2,17 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { CityService } from 'src/app/services/city.service';
 import { Observable } from 'rxjs';
 import { ICity } from 'src/app/models/city';
+import { ICreatePlace } from 'src/app/models/create-place';
 
 @Component({
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  myFiles: string[] = [];
   cities$: Observable<ICity[]>;
-  placeName: string;
-  selectedCityId: string;
-  placeAddress: string;
+  createPlaceModel: ICreatePlace = {
+    placeName: "",
+    cityId: "",
+    placeAddress: "",
+    pictures: []
+  };
 
   constructor(private cityService: CityService) { }
 
@@ -21,21 +24,14 @@ export class AdminComponent implements OnInit {
   }
 
   getFileDetails(e) {
-    this.myFiles = [];
+    this.createPlaceModel.pictures = [];
     for (var i = 0; i < e.target.files.length; i++) {
-      this.myFiles.push(e.target.files[i]);
+      this.createPlaceModel.pictures.push(e.target.files[i]);
     }
   }
 
   onSubmit() {
     // TODO: Add validation
-    const formData = new FormData();
-
-    for (var i = 0; i < this.myFiles.length; i++) {
-      formData.append("fileUpload", this.myFiles[i]);
-    }
-
-    formData.append("placeName", this.placeName);
-    formData.append("cityId", this.selectedCityId);
+    this.cityService.create(this.createPlaceModel);
   }
 }
