@@ -1,11 +1,15 @@
 const placeRepository = require('../../../repositories/place.repository');
 const util = require('../../../util');
+const multer = require('multer');
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 class PlaceController {
     constructor(router) {
         router.get('/', this.getAll.bind(this));
         router.get('/:id', this.getById.bind(this));
-        router.post('/create', this.create.bind(this));
+        router.post('/create', upload.any(), this.create.bind(this));
         router.get('/name/:name', this.getByName.bind(this));
     }
 
@@ -32,6 +36,7 @@ class PlaceController {
 
     create(req, res){
         console.log(req.body);
+        console.log(req.files);
         res.send(req.body);
     }
 }
