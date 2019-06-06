@@ -9,6 +9,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { BrowserComponent } from './components/browser/browser.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
 import { PlaceDetailsComponent } from './components/place-details/place-details.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PlaceDetailsComponent } from './components/place-details/place-details.
     NotFoundComponent,
     BrowserComponent,
     CityDetailsComponent,
-    PlaceDetailsComponent
+    PlaceDetailsComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
