@@ -15,7 +15,7 @@ export class CityService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<ICity[]> {
-    const citiesUrl = this.baseUrl + "/cities";
+    const citiesUrl = this.baseUrl + "/cities?exclude=places";
 
     return this.http.get<ICity[]>(citiesUrl)
       .pipe(
