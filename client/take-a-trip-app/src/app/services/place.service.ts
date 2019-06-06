@@ -36,7 +36,7 @@ export class PlaceService {
 
     const createPlaceUrl = this.baseUrl + "/places/create";
     this.http.post(createPlaceUrl, formData).subscribe(
-      result => {},
+      result => {console.log(result)},
       error => handleHttpError("Create place", null)
     );
   }
