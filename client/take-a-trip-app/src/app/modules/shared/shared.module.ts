@@ -1,15 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CarouselComponent
+  ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
-  exports:[
-    HttpClientModule
+  exports: [
+    CarouselComponent,
+    HttpClientModule,
+    NgbModule
   ]
 })
 export class SharedModule { }
