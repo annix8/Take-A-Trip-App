@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   cities$: Observable<ICity[]>;
   showAlertMessage: boolean;
   alertMessage: string;
+  alertSuccess: boolean;
   createPlaceModel: ICreatePlace = {
     placeName: "",
     cityId: "",
@@ -36,6 +37,21 @@ export class AdminComponent implements OnInit {
     }
   }
 
+  closeAlert() {
+    this.showAlertMessage = false;
+  }
+
+  setAlertClasses() {
+    return {
+      "alert": true,
+      "alert-success": this.alertSuccess,
+      "alert-danger": !this.alertSuccess,
+      "alert-dismissible ": true,
+      "fade": true,
+      "show": true
+    };
+  }
+
   onSubmit() {
     // TODO: Add validation
     this.placeService.create(this.createPlaceModel)
@@ -43,11 +59,13 @@ export class AdminComponent implements OnInit {
         result => {
           this.createPlaceForm.reset();
           this.showAlertMessage = true;
+          this.alertSuccess = true;
           this.alertMessage = "Successfully created.";
         },
         error => {
           this.showAlertMessage = true;
-          this.alertMessage = "An error occured " + error;
+          this.alertSuccess = false;
+          this.alertMessage = "An error occured " + error.message;
         }
       );
   }
