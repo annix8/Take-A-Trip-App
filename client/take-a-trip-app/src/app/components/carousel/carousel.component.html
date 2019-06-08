@@ -1,9 +1,9 @@
-<ngb-carousel *ngIf="images">
+<ngb-carousel *ngIf="images && images.length > 0">
     <ng-template ngbSlide *ngFor="let image of images">
-      <img [src]="image" alt="Random fourth slide">
+      <img [src]="image.path">
       <div class="carousel-caption">
-        <h3>And no wrap after last slide.</h3>
-        <p>This carousel uses customized default values.</p>
+        <h3 *ngIf="image.heading">{{image.heading}}</h3>
+        <p *ngIf="image.paragraph">{{image.paragraph}}</p>
       </div>
     </ng-template>
   </ngb-carousel>
