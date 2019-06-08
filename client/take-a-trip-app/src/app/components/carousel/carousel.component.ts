@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ICarouselImage } from '../../models/carousel-image'
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-carousel',
@@ -19,6 +20,7 @@ export class CarouselComponent implements OnInit {
     config.pauseOnHover = false;
   }
 
-  ngOnInit() {
+  ngOnInit(){
+    console.log(this.images);
   }
 }
