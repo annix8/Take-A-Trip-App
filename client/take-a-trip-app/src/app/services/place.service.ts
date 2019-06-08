@@ -35,9 +35,6 @@ export class PlaceService {
     formData.append("cityId", createPlaceModel.cityId);
 
     const createPlaceUrl = this.baseUrl + "/places/create";
-    this.http.post(createPlaceUrl, formData).subscribe(
-      result => {console.log(result)},
-      error => handleHttpError("Create place", null)
-    );
+    return this.http.post(createPlaceUrl, formData);
   }
 }

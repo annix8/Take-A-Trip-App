@@ -1,5 +1,9 @@
 <div class="container">
 
+    <div class="alert alert-success" role="alert" *ngIf="showAlertMessage">
+        {{alertMessage}}
+      </div>
+
   <form #form="ngForm">
     <div class="form-group">
       <label for="placeName">Name</label>
