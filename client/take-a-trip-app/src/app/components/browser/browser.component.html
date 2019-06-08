@@ -1,8 +1,8 @@
 <h4><label for="search-box">Where are you travelling to?</label></h4>
 
-<input type="text" class="form-control" #browseInput (input)="browse(browseInput.value)" />
+<input type="text" class="form-control city-browser" #browseInput (input)="browse(browseInput.value)" />
 
-<div class="list-group">
+<div class="list-group city-browser-result">
   <a *ngFor="let city of cities$ | async" routerLink="/city/{{city._id}}" class="list-group-item list-group-item-action">
     {{city.name}}, {{city.country.name}}</a>
 </div>
