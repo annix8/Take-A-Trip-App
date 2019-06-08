@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { ICity } from '../models/city';
-import { handleHttpError } from '../util';
+import { handleHttpError } from '../util/http-util';
 
 @Injectable({
   providedIn: 'root'

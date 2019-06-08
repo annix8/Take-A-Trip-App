@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPlace } from '../models/place';
-import { handleHttpError } from '../util';
+import { handleHttpError } from '../util/http-util';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { ICreatePlace } from '../models/create-place';
