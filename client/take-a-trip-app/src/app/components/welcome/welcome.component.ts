@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICity } from 'src/app/models/city';
 import { CityService } from 'src/app/services/city.service';
-import { WELCOME_IMAGES } from 'src/app/lib/constants';
+import { WELCOME_IMAGES } from 'src/app/util/constants';
 
 @Component({
   selector: 'app-welcome',
