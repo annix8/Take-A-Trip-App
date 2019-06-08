@@ -11,6 +11,8 @@ import { BrowserComponent } from './components/browser/browser.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
 import { PlaceDetailsComponent } from './components/place-details/place-details.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './components/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +22,15 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserComponent,
     CityDetailsComponent,
     PlaceDetailsComponent,
-    AdminComponent
+    AdminComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

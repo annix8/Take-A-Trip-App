@@ -36,6 +36,7 @@ class PlaceController {
     }
 
     create(req, res){
+        // TODO: Validate
         const place = {
             name: req.body.placeName,
             address: req.body.placeAddress,
