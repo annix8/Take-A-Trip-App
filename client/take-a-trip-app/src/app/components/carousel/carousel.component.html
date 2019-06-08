@@ -1,8 +1,9 @@
 <ngb-carousel *ngIf="images && images.length > 0">
     <ng-template ngbSlide *ngFor="let image of images">
-        <a href="{{image.path}}" target="_blank">
+        <a href="{{image.path}}" target="_blank" *ngIf="image.clickable">
           <img src="{{image.path}}" height="500rem" width="100%"/>
         </a>
+        <img [src]="image.path" *ngIf="!image.clickable">
       <div class="carousel-caption">
         <h3 *ngIf="image.heading">{{image.heading}}</h3>
         <p *ngIf="image.paragraph">{{image.paragraph}}</p>

@@ -21,7 +21,7 @@ export class PlaceDetailsComponent implements OnInit {
       .subscribe(place => {
         this.place = place;
         this.place.images.forEach(x => {
-          this.images.push({ path: x } as ICarouselImage)
+          this.images.push({ path: x, clickable: true } as ICarouselImage)
         });
       });
   }
