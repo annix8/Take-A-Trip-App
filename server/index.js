@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./router');
-const dbSeeder = require('./lib/dbSeeder');
+const dbSeeder = require('./lib/seed/dbSeeder');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 

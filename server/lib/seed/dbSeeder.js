@@ -1,10 +1,10 @@
-const City = require('../models/city');
-const Place = require('../models/place');
-const Country = require('../models/country');
-const Image = require('../models/image');
+const City = require('../../models/city');
+const Place = require('../../models/place');
+const Country = require('../../models/country');
+const Image = require('../../models/image');
 const fs = require('fs');
-const countryData = require('../lib/seed-data/countries.json');
-const cityData = require('../lib/seed-data/cities.json');
+const countryData = require('./data/countries.json');
+const cityData = require('./data/cities.json');
 
 class DbSeeder {
     seed() {
