@@ -1,5 +1,4 @@
 const util = require('../../../util');
-const Image = require('../../../models/image');
 const imageRepository = require('../../../repositories/image.repository');
 
 class ImageController {
