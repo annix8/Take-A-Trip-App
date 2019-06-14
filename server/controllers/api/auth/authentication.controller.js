@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+const jwtService = require('../../../lib/jwt.service');
 
 class AuthenticationController {
     constructor(router) {
@@ -6,13 +6,9 @@ class AuthenticationController {
     }
 
     login(req, res) {
-        const jwtBearerToken = jwt.sign({ foo: 'bar' }, 'shhh');
+        const jwtBearerToken = jwtService.signToken({foo: 'bar'});
 
         return res.json(jwtBearerToken);
-    }
-
-    logout(req, res) {
-
     }
 }
 
