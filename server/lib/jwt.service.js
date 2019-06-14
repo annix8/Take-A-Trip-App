@@ -4,7 +4,7 @@ const jwt_secret = "jwt_secret";
 
 class JwtService{
     signToken(payload){
-        jwt.sign(payload, jwt_secret);
+        return jwt.sign(payload, jwt_secret);
     }
 
     validateToken(token){
