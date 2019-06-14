@@ -1,10 +1,14 @@
+const User = require('../../models/user');
 const City = require('../../models/city');
 const Place = require('../../models/place');
 const Country = require('../../models/country');
 const Image = require('../../models/image');
 const fs = require('fs');
+const path = require('path');
+const userData = require('./data/users.json');
 const countryData = require('./data/countries.json');
 const cityData = require('./data/cities.json');
+const passwordService = require('../../services/password.service');
 
 class DbSeeder {
     seed() {
@@ -20,9 +24,22 @@ class DbSeeder {
     }
 
     seedData() {
+        seedUsers();
         seedCountries();
         setTimeout(seedCities, 8000);
     }
+}
+
+function seedUsers() {
+    userData.forEach(user => {
+        const userModel = new User({
+            username: user.username,
+            email: user.email,
+            password: passwordService.hashPassword(user.password)
+        });
+
+        userModel.save();
+    });
 }
 
 function seedCountries() {
@@ -62,7 +79,7 @@ function seedCities() {
             element.places.forEach(place => {
                 const placeImages = [];
                 place.imgs.forEach(imgPath => {
-                    const imgFullPath = __dirname + imgPath;
+                    const imgFullPath = path.join(__dirname, imgPath);
                     const file = fs.readFileSync(imgFullPath);
                     const imageModel = new Image({ file: file, contentType: 'image/png' });
                     imageModel.save();

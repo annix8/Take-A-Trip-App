@@ -6,8 +6,8 @@
                 "name": "Saint Alexander Nevsky Cathedral",
                 "address": "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia",
                 "imgs": [
-                    "/images/nevski-cathedral-1.jpg",
-                    "/images/nevski-cathedral-2.jpg"
+                    "../images/nevski-cathedral-1.jpg",
+                    "../images/nevski-cathedral-2.jpg"
                 ]
             },
             {
