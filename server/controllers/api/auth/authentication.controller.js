@@ -1,4 +1,4 @@
-const jwtService = require('../../../lib/services/jwt.service');
+const jwtService = require('../../../services/jwt.service');
 
 class AuthenticationController {
     constructor(router) {
