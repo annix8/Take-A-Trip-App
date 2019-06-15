@@ -25,4 +25,4 @@ export const WELCOME_IMAGES = [
     }
 ];
 
-export const TOKEN_KEY = "_token";
+export const TOKEN_KEY = "access_token";
