@@ -27,6 +27,13 @@ class AuthenticationService {
             }
         });
     }
+
+    register(username, email, password, callback) {
+        userRepository.create(username, email, passwordService.hashPassword(password),
+            (err, user) => {
+                callback(err, user);
+            });
+    }
 }
 
 module.exports = new AuthenticationService();

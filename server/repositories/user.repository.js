@@ -6,6 +6,18 @@ class UserRepository {
             callback(err, userResponse);
         });
     }
+
+    create(username, email, password, callback){
+        const user = new User({
+            username: username,
+            email: email,
+            password: password
+        });
+
+        user.save((err, userResponse) =>{
+            callback(err, userResponse);
+        });
+    }
 }
 
 module.exports = new UserRepository();
