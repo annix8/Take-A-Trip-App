@@ -10,19 +10,14 @@ class PlaceRepository {
             });
 
             const result = {
-                city: {
-                    _id: city._id,
-                    name: city.name
-                },
-                place: {
                     _id: place._id,
+                    address: place.address,
                     name: place.name,
                     images: place.images,
                     rating: place.ratings.reduce((p, c) => p + c, 0) / place.ratings.length
-                }
             };
 
-            callback(null, result);
+            callback(err, result);
         });
     }
 
