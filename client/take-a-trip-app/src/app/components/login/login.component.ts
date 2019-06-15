@@ -1,34 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  isSuccess: boolean | null;
+  loginFailed: boolean;
   message: string;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
   }
 
   onSubmit(username, password) {
     this.authService.login(username, password)
-      .subscribe(
+      .subscribe(result => {
+        if (result.success === true) {
+          this.loginFailed = false;
+          this.router.navigate(["/"]);
+        }
+        else {
+          this.loginFailed = true;
+          this.message = JSON.stringify(result.error);
+        }
+      },
         err => {
-          this.isSuccess = false;
+          this.loginFailed = true;
           this.message = JSON.stringify(err);
-        },
-        result => {
-          this.isSuccess = true;
-          this.message = JSON.stringify(result);
         }
       )
   }
 
-  closeAlert(){
-    this.isSuccess = null;
+  closeAlert() {
+    this.loginFailed = false;
   }
 }

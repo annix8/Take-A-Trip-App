@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { handleHttpError } from '../util/http-util';
 import { Observable } from 'rxjs';
 import { TOKEN_KEY } from '../util/constants';
@@ -17,8 +17,10 @@ export class AuthenticationService {
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/login", { username, password })
       .pipe(
-        map(result => {
-          localStorage.setItem(TOKEN_KEY, result.token);
+        tap(result => {
+          if (result.success === true) {
+            localStorage.setItem(TOKEN_KEY, result.token);
+          }
         }),
         catchError(handleHttpError("Login", null))
       );
@@ -29,6 +31,8 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): boolean {
-    return false;
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    return !!token;
   }
 }
