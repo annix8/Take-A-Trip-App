@@ -1,6 +1,5 @@
 const User = require('../../models/user');
 const City = require('../../models/city');
-const Place = require('../../models/place');
 const Country = require('../../models/country');
 const Image = require('../../models/image');
 const fs = require('fs');
@@ -86,9 +85,8 @@ function seedCities() {
 
                     placeImages.push({ _id: imageModel._id });
                 });
-                const currPlace = new Place(place);
-                currPlace.images = placeImages;
-                currPlace.save();
+                const currPlace = {...place};
+                currPlace.img = placeImages;
                 city.places.push(currPlace);
             });
 
