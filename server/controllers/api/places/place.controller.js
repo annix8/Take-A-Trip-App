@@ -35,6 +35,7 @@ class PlaceController {
     rate(req, res) {
         const placeId = req.params.id;
         const rating = req.params.rating;
+        return util.handleJsonResponse(res, null, {message: "not implemented"})
     }
 }
 
