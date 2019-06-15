@@ -11,6 +11,7 @@ import { BrowserComponent } from './components/browser/browser.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
 import { PlaceDetailsComponent } from './components/place-details/place-details.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AdminComponent } from './components/admin/admin.component';
     BrowserComponent,
     CityDetailsComponent,
     PlaceDetailsComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
