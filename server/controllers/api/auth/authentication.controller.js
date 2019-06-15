@@ -5,6 +5,11 @@ class AuthenticationController {
     constructor(router) {
         router.post('/login', this.login.bind(this));
         router.post('/register', this.register.bind(this));
+        router.get('/test', util.requireJwt.bind(this), this.testAuth.bind(this));
+    }
+
+    testAuth(req, res){
+        return res.send("You are ok");
     }
 
     login(req, res) {
