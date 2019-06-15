@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { handleHttpError } from '../util/http-util';
 import { Observable } from 'rxjs';
 import { TOKEN_KEY } from '../util/constants';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import { TOKEN_KEY } from '../util/constants';
 export class AuthenticationService {
   baseUrl = environment.apiUrl + "/auth";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    public jwtHelper: JwtHelperService) { }
 
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(this.baseUrl + "/login", { username, password })
@@ -32,11 +34,11 @@ export class AuthenticationService {
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem(TOKEN_KEY);
-
-    return !!token;
+    
+    return token && this.jwtHelper.isTokenExpired(token);
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem(TOKEN_KEY);
   }
 }
