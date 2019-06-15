@@ -13,8 +13,8 @@ class AuthenticationController {
     }
 
     login(req, res) {
-        const username = req.headers.username;
-        const password = req.headers.password;
+        const username = req.body.username;
+        const password = req.body.password;
 
         authenticationService.authenticate(username, password, (err, result) => {
             return util.handleJsonResponse(res, err, result)
@@ -22,9 +22,9 @@ class AuthenticationController {
     }
 
     register(req, res) {
-        const username = req.headers.username;
-        const email = req.headers.email;
-        const password = req.headers.password;
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
 
         authenticationService.register(username, email, password,
             (err, result) => {
