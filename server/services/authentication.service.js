@@ -17,20 +17,21 @@ class AuthenticationService {
                 if (!user) {
                     callback(invalidCredentialsObj);
                 }
-
-                const isPasswordValid = passwordService.checkPassword(password, user.password);
-                if (!isPasswordValid) {
-                    callback(invalidCredentialsObj);
-                }
                 else {
-                    const jwtBearerToken = jwtService.signToken({
-                        username: user.username
-                    });
-                    const result = {
-                        success: true,
-                        token: jwtBearerToken
-                    };
-                    callback(null, result);
+                    const isPasswordValid = passwordService.checkPassword(password, user.password);
+                    if (!isPasswordValid) {
+                        callback(invalidCredentialsObj);
+                    }
+                    else {
+                        const jwtBearerToken = jwtService.signToken({
+                            username: user.username
+                        });
+                        const result = {
+                            success: true,
+                            token: jwtBearerToken
+                        };
+                        callback(null, result);
+                    }
                 }
             }
         });
