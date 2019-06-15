@@ -51,7 +51,7 @@ class AuthenticationService {
                         success: true,
                         token: jwtBearerToken
                     };
-                    callback(err, result);
+                    callback(null, result);
                 }
             });
     }
