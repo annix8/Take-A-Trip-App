@@ -4,17 +4,18 @@ const imageRepository = require('../repositories/image.repository');
 class PlaceRepository {
     getById(placeId, callback) {
         City.findOne({ "places._id": placeId }, (err, city) => {
-            const place = city.places.find(x => x._id == placeId);
+            const cityCopy = city.toJSON();
+            const place = cityCopy.places.find(x => x._id == placeId);
             place.images = place.images.map(imageId => {
                 return `http://localhost:3200/api/images/${imageId._id}`;
             });
 
             const result = {
-                    _id: place._id,
-                    address: place.address,
-                    name: place.name,
-                    images: place.images,
-                    rating: place.ratings.reduce((p, c) => p + c, 0) / place.ratings.length
+                _id: place._id,
+                address: place.address,
+                name: place.name,
+                images: place.images,
+                rating: place.ratings.reduce((p, c) => p + c, 0) / place.ratings.length
             };
 
             callback(err, result);
