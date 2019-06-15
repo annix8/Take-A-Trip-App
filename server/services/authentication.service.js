@@ -1,5 +1,6 @@
 const passwordService = require('./password.service');
 const userRepository = require('../repositories/user.repository');
+const jwtService = require('./jwt.service');
 
 const invalidCredentialsObj = {
     success: false,
@@ -22,7 +23,14 @@ class AuthenticationService {
                     callback(invalidCredentialsObj);
                 }
                 else {
-                    callback(null, user);
+                    const jwtBearerToken = jwtService.signToken({
+                        username: user.username
+                    });
+                    const result = {
+                        success: true,
+                        token: jwtBearerToken
+                    };
+                    callback(null, result);
                 }
             }
         });
@@ -31,7 +39,19 @@ class AuthenticationService {
     register(username, email, password, callback) {
         userRepository.create(username, email, passwordService.hashPassword(password),
             (err, user) => {
-                callback(err, user);
+                if (err) {
+                    callback(err);
+                }
+                else {
+                    const jwtBearerToken = jwtService.signToken({
+                        username: user.username
+                    });
+                    const result = {
+                        success: true,
+                        token: jwtBearerToken
+                    };
+                    callback(err, result);
+                }
             });
     }
 }
