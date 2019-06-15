@@ -6,6 +6,7 @@ import { handleHttpError } from '../util/http-util';
 import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { ICreatePlace } from '../models/create-place';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { ICreatePlace } from '../models/create-place';
 export class PlaceService {
   baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private authService: AuthenticationService) { }
 
   getById(placeId: string): Observable<IPlace> {
     const placeUrl = this.baseUrl + "/places/" + placeId;
@@ -35,6 +37,7 @@ export class PlaceService {
     formData.append("cityId", createPlaceModel.cityId);
 
     const createPlaceUrl = this.baseUrl + "/places/create";
-    return this.http.post(createPlaceUrl, formData);
+    const token = this.authService.getToken();
+    return this.http.post(createPlaceUrl, formData, {headers: {"Authorization": `Bearer ${token}`}});
   }
 }
