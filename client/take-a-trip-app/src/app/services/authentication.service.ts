@@ -34,8 +34,7 @@ export class AuthenticationService {
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem(TOKEN_KEY);
-    
-    return token && this.jwtHelper.isTokenExpired(token);
+    return token && !this.jwtHelper.isTokenExpired(token);
   }
 
   getToken() {
