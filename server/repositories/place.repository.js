@@ -32,6 +32,18 @@ class PlaceRepository {
 
         return placeModel;
     }
+
+    rate(id, rating, callback){
+        Place.findById(id, (err, place) =>{
+            const ratingValue = place.rating.value;
+            const totalVotes = place.rating.totalVotes;
+            const newRating = (Number(ratingValue) + Number(rating)) / (Number(totalVotes) + 1);
+            place.rating.value = newRating;
+            place.rating.totalVotes++;
+            place.save();
+            callback(place);
+        });
+    }
 }
 
 module.exports = new PlaceRepository();
