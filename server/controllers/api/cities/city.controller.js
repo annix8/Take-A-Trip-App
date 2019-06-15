@@ -14,7 +14,7 @@ class CityController {
             {},
             util.getExcludeParams(req)
         );
-        cityRepository.get(queryObj, (err, city) => {
+        cityRepository.getCity(queryObj, (err, city) => {
             return util.handleJsonResponse(res, err, city);
         });
     }
@@ -24,7 +24,7 @@ class CityController {
             { _id: req.params.id },
             util.getExcludeParams(req)
         );
-        cityRepository.get(queryObj, (err, city) => {
+        cityRepository.getCity(queryObj, (err, city) => {
             return util.handleJsonResponse(res, err, city[0]);
         })
     }
@@ -34,7 +34,7 @@ class CityController {
             { name: { "$regex": req.params.name, "$options": "i" } },
             util.getExcludeParams(req)
         );
-        cityRepository.get(queryObj, (err, cities) => {
+        cityRepository.getCity(queryObj, (err, cities) => {
             return util.handleJsonResponse(res, err, cities);
         });
     }
