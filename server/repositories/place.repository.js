@@ -2,53 +2,27 @@ const City = require('../models/city');
 const imageRepository = require('../repositories/image.repository');
 
 class PlaceRepository {
-    get(query, callback) {
-        // Place.find(query, (err, placesResponse) => {
-        //     const placesJson = placesResponse.map(place => {
-        //         const newPlace = place.toJSON();
-        //         newPlace.images = newPlace.images.map(imageId => {
-        //             return `http://localhost:3200/api/images/${imageId._id}`;
-        //         });
-        //         newPlace.rating = newPlace.rating.value;
-
-        //         return newPlace;
-        //     });
-
-        //     callback(err, placesJson);
-        // });
-    }
-
     getById(placeId, callback) {
         City.findOne({ "places._id": placeId }, (err, city) => {
-            const cityCopy = city.toJSON();
-            const place = cityCopy.places.find(x => x._id == placeId);
+            const place = city.places.find(x => x._id == placeId);
             place.images = place.images.map(imageId => {
                 return `http://localhost:3200/api/images/${imageId._id}`;
             });
+
             const result = {
                 city: {
                     _id: city._id,
                     name: city.name
                 },
-                place:{
+                place: {
                     _id: place._id,
-                    name: place.name
+                    name: place.name,
+                    images: place.images,
+                    rating: place.ratings.reduce((p, c) => p + c, 0) / place.ratings.length
                 }
             };
+
             callback(null, result);
-            // const placesJson = city.places.map(place => {
-            //     const newPlace = place.toJSON();
-            //     newPlace.images = newPlace.images.map(imageId => {
-            //         return `http://localhost:3200/api/images/${imageId._id}`;
-            //     });
-            //     newPlace.rating = newPlace.rating.value;
-
-            //     return newPlace;
-            // });
-            // const cityResult = {...city};
-            // cityResult.places = placesJson;
-
-            // callback(err, cityResult);
         });
     }
 

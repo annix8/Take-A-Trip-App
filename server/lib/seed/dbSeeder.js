@@ -86,7 +86,7 @@ function seedCities() {
                     placeImages.push({ _id: imageModel._id });
                 });
                 const currPlace = {...place};
-                currPlace.img = placeImages;
+                currPlace.images = placeImages;
                 city.places.push(currPlace);
             });
 
