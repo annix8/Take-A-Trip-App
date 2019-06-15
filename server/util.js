@@ -9,7 +9,7 @@ class Util {
         else {
             const token = auth.split(' ')[1];
             const isTokenValid = jwtService.validateToken(token);
-            if (!isTokenValid.sucess) {
+            if (!isTokenValid.success) {
                 return res.status(401).send({ error: "Invalid json web token" });
             }
             return next();
