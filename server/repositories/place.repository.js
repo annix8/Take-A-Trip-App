@@ -24,15 +24,11 @@ class PlaceRepository {
 
     create(place) {
         const imageIds = imageRepository.createMany(place.images).map(x => { return { _id: x._id } });
-        const placeModel = new Place(
-            {
-                name: place.name,
-                address: place.address,
-                images: imageIds
-            }
-        );
-
-        placeModel.save();
+        const placeModel = {
+            name: place.name,
+            address: place.address,
+            images: imageIds
+        }
 
         return placeModel;
     }

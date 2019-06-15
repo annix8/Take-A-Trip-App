@@ -1,7 +1,7 @@
 const City = require('../models/city');
 
 class CityRepository {
-    get(/*MongooseQueryObject*/mongooseQueryObject, callback) {
+    get(mongooseQueryObject, callback) {
         City.find(mongooseQueryObject.find, (err, cityResponse) => {
             callback(err, cityResponse);
         }).select(mongooseQueryObject.select);
