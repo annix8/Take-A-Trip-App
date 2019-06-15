@@ -9,6 +9,7 @@ class PlaceRepository {
                 newPlace.images = newPlace.images.map(imageId => {
                     return `http://localhost:3200/api/images/${imageId._id}`;
                 });
+                newPlace.rating = newPlace.rating.value;
 
                 return newPlace;
             });

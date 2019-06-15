@@ -10,8 +10,8 @@ class PlaceController {
     constructor(router) {
         router.get('/', this.getAll.bind(this));
         router.get('/:id', this.getById.bind(this));
-        router.post('/create', util.requireJwt.bind(this), upload.any(), this.create.bind(this));
         router.get('/name/:name', this.getByName.bind(this));
+        router.post('/create', util.requireJwt.bind(this), upload.any(), this.create.bind(this));
     }
 
     getAll(req, res) {
