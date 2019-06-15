@@ -24,3 +24,5 @@ export const WELCOME_IMAGES = [
         clickable: false
     }
 ];
+
+export const TOKEN_KEY = "_token";
