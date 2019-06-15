@@ -8,7 +8,7 @@ class AuthenticationController {
         router.get('/test', util.requireJwt.bind(this), this.testAuth.bind(this));
     }
 
-    testAuth(req, res){
+    testAuth(req, res) {
         return res.send("You are ok");
     }
 

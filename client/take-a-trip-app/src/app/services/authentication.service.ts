@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { handleHttpError } from '../util/http-util';
 import { Observable } from 'rxjs';
@@ -10,16 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
   baseUrl = environment.apiUrl + "/auth";
-  defaultHttpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json'
-    })
-  };
 
   constructor(private http: HttpClient) { }
 
-  login(username, password) : Observable<any> {
-    return this.http.post(this.baseUrl + "/login", { username: username, password: password }, this.defaultHttpOptions)
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(this.baseUrl + "/login", { username, password })
       .pipe(
         catchError(handleHttpError("Login", null))
       );
