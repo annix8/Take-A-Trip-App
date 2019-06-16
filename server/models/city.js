@@ -5,7 +5,12 @@ const PlaceSchema = new Schema(
     {
         name: { type: String, required: true, trim: true },
         address: { type: String, required: true, trim: true },
-        ratings: [{ type: Number, default: 0 }],
+        ratings: [
+            {
+                rating: { type: Number, default: 0 },
+                userId: { type: String }
+            }
+        ],
         images: [{ _id: { type: Schema.Types.ObjectId, ref: 'Image' }, }]
     }
 );

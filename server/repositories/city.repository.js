@@ -22,7 +22,7 @@ class CityRepository {
                 address: place.address,
                 name: place.name,
                 images: place.images,
-                rating: place.ratings.reduce((p, c) => p + c, 0) / place.ratings.length
+                rating: place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length
             };
 
             callback(err, result);
@@ -46,8 +46,12 @@ class CityRepository {
 
     ratePlace({ cityId, userId, placeId, rating }, callback) {
         City.findById(cityId, (err, city) => {
-            console.log(cityId);
-            const place = city.places.find(x => x._id == placeId);
+            const cityCopy = city.toJSON();
+            const place = cityCopy.places.find(x => x._id == placeId);
+            const allOtherPlaces = cityCopy.places.filter(place => place._id != placeId);
+            allOtherPlaces.push(setRatingToPlace(place, userId, rating));
+            city.places = allOtherPlaces;
+            city.save();
 
             const ratePlaceObj = {
                 userId: userId,
@@ -56,25 +60,22 @@ class CityRepository {
                 rating: rating
             };
 
-            // TODO check scenario if user has rated the place
-            userRepository.ratePlace(ratePlaceObj, (err, userRatedPlaceBefore) => {
-                city.places.map(x => {
-                    if (x._id == placeId) {
-                        x.ratings.push(rating);
-                        return x;
-                    }
-                    else {
-                        return x;
-                    }
-                });
-                console.log(JSON.stringify(city));
-                city.save();
-                console.log("city saved")
-                console.log(err);
-                callback(err, { success: true });
+            userRepository.ratePlace(ratePlaceObj, (err, userRateResult) => {
+                callback(err, userRateResult);
             });
         });
     }
+}
+
+function setRatingToPlace(place, userId, newRating) {
+    const ratings = place.ratings.filter(rating => rating.userId != userId);
+    ratings.push({
+        userId: userId,
+        rating: newRating
+    });
+    place.ratings = ratings;
+
+    return place;
 }
 
 module.exports = new CityRepository();

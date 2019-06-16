@@ -21,34 +21,13 @@ class UserRepository {
 
     ratePlace({ userId, placeId, placeName, rating }, callback) {
         User.findById(userId, (err, user) => {
-            let userRatedPlace = false;
-            const placeRatedByUser = user.ratedPlaces.find(x => x.placeId == place.placeId);
-            if (!placeRatedByUser) {
-                user.ratedPlaces.push({
-                    placeId: placeId,
-                    placeName: placeName,
-                    rating: rating
-                });
+            const allOtherPlaces = user.ratedPlaces.filter(place => place.placeId != placeId);
+            const placeToAdd = { placeId: placeId, placeName: placeName, rating: rating };
+            allOtherPlaces.push(placeToAdd);
+            user.ratePlaces = allOtherPlaces;
 
-                userRatedPlace = false;
-            }
-            else {
-                user.ratedPlaces.map(x => {
-                    if (x.placeId == placeId) {
-                        return {
-                            placeId: x.placeId,
-                            placeName: x.placeName,
-                            rating: rating
-                        };
-                    }
-
-                    return x;
-                });
-
-                userRatedPlace = true;
-            }
-
-            callback(null, userRatedPlace);
+            user.save();
+            callback(null, {success: true});
         });
     }
 }
