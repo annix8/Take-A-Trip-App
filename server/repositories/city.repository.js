@@ -53,16 +53,7 @@ class CityRepository {
             city.places = allOtherPlaces;
             city.save();
 
-            const ratePlaceObj = {
-                userId: userId,
-                placeId: placeId,
-                placeName: place.placeName,
-                rating: rating
-            };
-
-            userRepository.ratePlace(ratePlaceObj, (err, userRateResult) => {
-                callback(err, userRateResult);
-            });
+            callback({ success: true, place: place });
         });
     }
 }

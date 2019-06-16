@@ -21,13 +21,14 @@ class UserRepository {
 
     ratePlace({ userId, placeId, placeName, rating }, callback) {
         User.findById(userId, (err, user) => {
-            const allOtherPlaces = user.ratedPlaces.filter(place => place.placeId != placeId);
+            const userCopy = user.toJSON();
+            const allOtherPlaces = userCopy.ratedPlaces.filter(place => place.placeId != placeId);
             const placeToAdd = { placeId: placeId, placeName: placeName, rating: rating };
             allOtherPlaces.push(placeToAdd);
-            user.ratePlaces = allOtherPlaces;
+            user.ratedPlaces = allOtherPlaces;
 
             user.save();
-            callback(null, {success: true});
+            callback({ success: true });
         });
     }
 }

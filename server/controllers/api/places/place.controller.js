@@ -1,5 +1,5 @@
 const cityRepository = require('../../../repositories/city.repository');
-const userRepository = require('../../../repositories/user.repository');
+const placeRatingService = require('../../../services/place-rating.service');
 const util = require('../../../util');
 const multer = require('multer');
 
@@ -48,8 +48,8 @@ class PlaceController {
             userId: userId,
             placeId: placeId,
             rating: rating
-        }
-        cityRepository.ratePlace(rateObj, (err, success) => {
+        };
+        placeRatingService.rate(rateObj, (err, success) => {
             return util.handleJsonResponse(res, err, success);
         });
     }
