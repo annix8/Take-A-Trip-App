@@ -17,7 +17,7 @@ class PlaceRatingService {
                 });
             }
             else {
-                callback(cityUpdateResult);
+                callback({ success: false, error: "Could not rate place in cities" }, cityUpdateResult);
             }
         });
     }
