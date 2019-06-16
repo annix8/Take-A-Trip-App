@@ -1,5 +1,6 @@
 const City = require('../models/city');
 const imageRepository = require('../repositories/image.repository');
+const userRepository = require('../repositories/user.repository');
 
 class CityRepository {
     getCity(mongooseQueryObject, callback) {
@@ -8,7 +9,7 @@ class CityRepository {
         }).select(mongooseQueryObject.select);
     }
 
-    getPlaceById(placeId, callback){
+    getPlaceById(placeId, callback) {
         City.findOne({ "places._id": placeId }, (err, city) => {
             const cityCopy = city.toJSON();
             const place = cityCopy.places.find(x => x._id == placeId);
@@ -36,10 +37,42 @@ class CityRepository {
             images: imageIds
         }
 
-        City.findById(place.cityId, (err, city) =>{
+        City.findById(place.cityId, (err, city) => {
             city.places.push(placeModel);
             city.save();
             callback(err, city);
+        });
+    }
+
+    ratePlace({ cityId, userId, placeId, rating }, callback) {
+        City.findById(cityId, (err, city) => {
+            console.log(cityId);
+            const place = city.places.find(x => x._id == placeId);
+
+            const ratePlaceObj = {
+                userId: userId,
+                placeId: placeId,
+                placeName: place.placeName,
+                rating: rating
+            };
+
+            // TODO check scenario if user has rated the place
+            userRepository.ratePlace(ratePlaceObj, (err, userRatedPlaceBefore) => {
+                city.places.map(x => {
+                    if (x._id == placeId) {
+                        x.ratings.push(rating);
+                        return x;
+                    }
+                    else {
+                        return x;
+                    }
+                });
+                console.log(JSON.stringify(city));
+                city.save();
+                console.log("city saved")
+                console.log(err);
+                callback(err, { success: true });
+            });
         });
     }
 }

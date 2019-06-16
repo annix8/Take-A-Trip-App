@@ -1,4 +1,5 @@
 const cityRepository = require('../../../repositories/city.repository');
+const userRepository = require('../../../repositories/user.repository');
 const util = require('../../../util');
 const multer = require('multer');
 
@@ -9,7 +10,7 @@ class PlaceController {
     constructor(router) {
         router.get('/:id', this.getById.bind(this));
         router.post('/create', util.requireJwt.bind(this), upload.any(), this.create.bind(this));
-        router.post('/rate/:id/:rating', this.rate.bind(this));
+        router.post('/:id/rate/:rating', this.rate.bind(this));
     }
 
     getById(req, res) {
@@ -35,7 +36,22 @@ class PlaceController {
     rate(req, res) {
         const placeId = req.params.id;
         const rating = req.params.rating;
-        return util.handleJsonResponse(res, null, {message: "not implemented"})
+        const userId = req.query.userId;
+        const cityId = req.query.cityId;
+
+        if (!placeId || !rating || !userId) {
+            return util.handleJsonResponse(res, { success: false, error: "Rating, placeId and userId are required" }, null);
+        }
+
+        const rateObj = {
+            cityId: cityId,
+            userId: userId,
+            placeId: placeId,
+            rating: rating
+        }
+        cityRepository.ratePlace(rateObj, (err, success) => {
+            return util.handleJsonResponse(res, err, success);
+        });
     }
 }
 
