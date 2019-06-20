@@ -10,7 +10,7 @@ class PlaceController {
     constructor(router) {
         router.get('/:id', this.getById.bind(this));
         router.post('/create', util.requireJwt.bind(this), upload.any(), this.create.bind(this));
-        router.post('/:id/rate/:rating', this.rate.bind(this));
+        router.post('/:id/rate', this.rate.bind(this));
     }
 
     getById(req, res) {
@@ -35,9 +35,9 @@ class PlaceController {
 
     rate(req, res) {
         const placeId = req.params.id;
-        const rating = req.params.rating;
-        const userId = req.query.userId;
-        const cityId = req.query.cityId;
+        const rating = req.body.rating;
+        const userId = req.body.userId;
+        const cityId = req.body.cityId;
 
         if (!placeId || !rating || !userId || !cityId) {
             return util.handleJsonResponse(res, { success: false, error: "Rating, placeId, userId, and cityId are required" }, null);
