@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { TOKEN_KEY } from 'src/app/util/constants';
+import { RatingComponent } from './components/rating/rating.component';
 
 function tokenGetter() {
   return localStorage.getItem(TOKEN_KEY);
@@ -13,7 +14,8 @@ function tokenGetter() {
 
 @NgModule({
   declarations: [
-    CarouselComponent
+    CarouselComponent,
+    RatingComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ function tokenGetter() {
   ],
   exports: [
     CarouselComponent,
+    RatingComponent,
     HttpClientModule,
     NgbModule,
     JwtModule
