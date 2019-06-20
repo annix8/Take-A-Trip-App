@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { ICreatePlace } from '../models/create-place';
 import { AuthenticationService } from './authentication.service';
+import { IRatePlace } from '../models/rate-place';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,20 @@ export class PlaceService {
     const createPlaceUrl = this.baseUrl + "/places/create";
     const token = this.authService.getToken();
     return this.http.post(createPlaceUrl, formData, {headers: {"Authorization": `Bearer ${token}`}});
+  }
+
+  rate(ratePlaceModel: IRatePlace): Observable<any>{
+    const placeId = ratePlaceModel.placeId;
+    const cityId = ratePlaceModel.cityId;
+    const userId = ratePlaceModel.userId;
+    const rating = ratePlaceModel.rating;
+    const ratePlaceUrl = this.baseUrl + `/places/${placeId}/rate`;
+    const body = {
+      cityId: cityId,
+      userId: userId,
+      rating: rating
+    };
+
+    return this.http.post(ratePlaceUrl, body);
   }
 }

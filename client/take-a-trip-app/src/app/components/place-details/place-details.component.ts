@@ -20,6 +20,7 @@ export class PlaceDetailsComponent implements OnInit {
     this.placeService.getById(placeId)
       .subscribe(place => {
         this.place = place;
+        console.log(place);
         this.place.images.forEach(x => {
           this.images.push({ path: x, clickable: true } as ICarouselImage)
         });
@@ -27,6 +28,12 @@ export class PlaceDetailsComponent implements OnInit {
   }
 
   handleRatingClick(rating: number){
+    this.placeService.rate({
+      userId: "5d06adc74b9fff42ac068fa2",
+        cityId: "5d06adcf4b9fff42ac068fa3",
+        placeId: this.place._id,
+        rating: rating
+    }).subscribe(x => console.log(x));
   }
 
 }
