@@ -26,4 +26,7 @@ export class PlaceDetailsComponent implements OnInit {
       });
   }
 
+  handleRatingClick(rating: number){
+  }
+
 }

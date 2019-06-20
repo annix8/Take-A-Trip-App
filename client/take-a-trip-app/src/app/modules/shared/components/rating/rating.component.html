@@ -1,3 +1,6 @@
-<p>
-  rating works!
-</p>
+<ngb-rating #ngbRating (click)="handleRateClick(ngbRating)">
+  <ng-template let-fill="fill" let-index="index">
+    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+  </ng-template>
+</ngb-rating>
+<pre>Your rating: <b>{{rating}} / 10</b></pre>
