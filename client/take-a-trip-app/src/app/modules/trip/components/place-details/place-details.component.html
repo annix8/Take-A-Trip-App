@@ -6,5 +6,6 @@
 <app-carousel [images]="images"></app-carousel>
 <div class="rating-section" *ngIf="place">
   <app-rating (rate)="handleRatingClick($event)" 
-              [totalRating]="place.rating"></app-rating>
+              [totalRating]="place.rating"
+              [givenRating]="userGivenRating"></app-rating>
 </div>

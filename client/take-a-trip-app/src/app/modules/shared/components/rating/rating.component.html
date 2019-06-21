@@ -1,6 +1,8 @@
-<ngb-rating [(rate)]="totalRating" #ngbRating (click)="handleRateClick(ngbRating)">
+<pre>Rating: <b>{{totalRating}} / {{maxRating}}</b></pre>
+
+<span>Given rating: </span>
+<ngb-rating [(rate)]="givenRating" #ngbRating (click)="handleRateClick(ngbRating)" [max]="maxRating" *ngIf="givenRating > 0">
   <ng-template let-fill="fill" let-index="index">
     <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
   </ng-template>
 </ngb-rating>
-<pre>Rated at: <b>{{totalRating}} / 10</b></pre>

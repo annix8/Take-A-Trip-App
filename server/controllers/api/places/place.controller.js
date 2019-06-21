@@ -3,8 +3,8 @@ const placeRatingService = require('../../../services/place-rating.service');
 const util = require('../../../util');
 const multer = require('multer');
 
-const storage = multer.memoryStorage()
-const upload = multer({ storage: storage })
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 class PlaceController {
     constructor(router) {

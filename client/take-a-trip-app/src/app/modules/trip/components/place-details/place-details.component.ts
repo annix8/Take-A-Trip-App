@@ -4,6 +4,7 @@ import { PlaceService } from 'src/app/services/place.service';
 import { ActivatedRoute } from '@angular/router';
 import { ICarouselImage } from 'src/app/models/carousel-image';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   templateUrl: './place-details.component.html',
@@ -12,9 +13,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class PlaceDetailsComponent implements OnInit {
   place: IPlace;
   images: ICarouselImage[] = [];
+  userGivenRating: number;
 
   constructor(private route: ActivatedRoute,
     private placeService: PlaceService,
+    private userService: UserService,
     private authService: AuthenticationService) { }
 
   ngOnInit() {
@@ -26,6 +29,9 @@ export class PlaceDetailsComponent implements OnInit {
           this.images.push({ path: x, clickable: true } as ICarouselImage)
         });
       });
+
+    this.userService.getUserRatingForPlace(this.authService.getUserId(), placeId)
+      .subscribe(rating => this.userGivenRating = rating);
   }
 
   handleRatingClick(rating: number) {
