@@ -37,8 +37,6 @@ class UserRepository {
             const userCopy = user.toJSON();
             const place = userCopy.ratedPlaces.find(place => place.placeId == placeId);
             let rating = 0;
-            console.log(place);
-            console.log(placeId);
             if (place) {
                 rating = place.rating;
             }
