@@ -1,6 +1,5 @@
 const City = require('../models/city');
 const imageRepository = require('../repositories/image.repository');
-const userRepository = require('../repositories/user.repository');
 
 class CityRepository {
     getCity(mongooseQueryObject, callback) {
