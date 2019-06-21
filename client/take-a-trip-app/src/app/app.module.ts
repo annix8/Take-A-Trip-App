@@ -9,15 +9,13 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BrowserComponent } from './components/browser/browser.component';
-import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     NotFoundComponent,
-    BrowserComponent,
-    AdminComponent
+    BrowserComponent
   ],
   imports: [
     BrowserModule,
