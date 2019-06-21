@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { UserModule } from './modules/user/user.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
@@ -11,7 +11,6 @@ import { BrowserComponent } from './components/browser/browser.component';
 import { CityDetailsComponent } from './components/city-details/city-details.component';
 import { PlaceDetailsComponent } from './components/place-details/place-details.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +20,13 @@ import { LoginComponent } from './components/login/login.component';
     BrowserComponent,
     CityDetailsComponent,
     PlaceDetailsComponent,
-    AdminComponent,
-    LoginComponent
+    AdminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     SharedModule,
-    FormsModule
+    UserModule, // the order of routes is important!
+    AppRoutingModule // the order of routes is important!
   ],
   providers: [],
   bootstrap: [AppComponent]
