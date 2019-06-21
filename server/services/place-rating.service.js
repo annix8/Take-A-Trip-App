@@ -2,7 +2,7 @@ const cityRepository = require('../repositories/city.repository');
 const userRepository = require('../repositories/user.repository');
 
 class PlaceRatingService {
-    rate(rateObj = { cityId, userId, placeId, rating }, callback) {
+    rate(rateObj = { userId, placeId, rating }, callback) {
         cityRepository.ratePlace(rateObj, (cityUpdateResult) => {
             if (cityUpdateResult.success === true) {
                 const ratePlaceObj = {

@@ -37,14 +37,12 @@ class PlaceController {
         const placeId = req.params.id;
         const rating = req.body.rating;
         const userId = req.body.userId;
-        const cityId = req.body.cityId;
 
-        if (!placeId || !rating || !userId || !cityId) {
-            return util.handleJsonResponse(res, { success: false, error: "Rating, placeId, userId, and cityId are required" }, null);
+        if (!placeId || !rating || !userId) {
+            return util.handleJsonResponse(res, { success: false, error: "Rating, placeId, and userId are required" }, null);
         }
 
         const rateObj = {
-            cityId: cityId,
             userId: userId,
             placeId: placeId,
             rating: rating

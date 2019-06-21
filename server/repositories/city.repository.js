@@ -43,8 +43,8 @@ class CityRepository {
         });
     }
 
-    ratePlace({ cityId, userId, placeId, rating }, callback) {
-        City.findById(cityId, (err, city) => {
+    ratePlace({ userId, placeId, rating }, callback) {
+        City.findOne({ "places._id": placeId }, (err, city) => {
             const cityCopy = city.toJSON();
             const place = cityCopy.places.find(x => x._id == placeId);
             const allOtherPlaces = cityCopy.places.filter(place => place._id != placeId);
