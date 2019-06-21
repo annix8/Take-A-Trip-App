@@ -14,6 +14,7 @@ export class PlaceDetailsComponent implements OnInit {
   place: IPlace;
   images: ICarouselImage[] = [];
   userGivenRating: number;
+  showRatingComponent: boolean;
 
   constructor(private route: ActivatedRoute,
     private placeService: PlaceService,
@@ -32,6 +33,8 @@ export class PlaceDetailsComponent implements OnInit {
 
     this.userService.getUserRatingForPlace(this.authService.getUserId(), placeId)
       .subscribe(rating => this.userGivenRating = rating);
+
+    this.showRatingComponent = this.authService.isLoggedIn();
   }
 
   handleRatingClick(rating: number) {
