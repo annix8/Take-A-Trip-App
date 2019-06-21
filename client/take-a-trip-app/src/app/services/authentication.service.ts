@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { handleHttpError } from '../util/http-util';
 import { Observable } from 'rxjs';
-import { TOKEN_KEY } from '../util/constants';
+import { TOKEN_KEY, USER_ID_KEY } from '../util/constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -33,12 +33,18 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): boolean {
-    const token = localStorage.getItem(TOKEN_KEY);
+    const token = this.getToken();
 
     return token && !this.jwtHelper.isTokenExpired(token);
   }
 
   getToken() {
     return localStorage.getItem(TOKEN_KEY);
+  }
+
+  getUserId(){
+    const token = this.getToken();
+
+    return this.jwtHelper.decodeToken(token)[USER_ID_KEY];
   }
 }

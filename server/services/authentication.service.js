@@ -58,8 +58,8 @@ function createSuccessResult(user){
 
 function createUserInfoForJwt(user){
     const userObj = {
-        username: user.username,
-        email: user.email,
+        user_name: user.username,
+        user_email: user.email,
         user_id: user._id
     };
 
