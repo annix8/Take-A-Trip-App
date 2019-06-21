@@ -26,7 +26,7 @@ export class PlaceService {
       );
   }
 
-  create(createPlaceModel: ICreatePlace){
+  create(createPlaceModel: ICreatePlace) {
     const formData = new FormData();
 
     for (var i = 0; i < createPlaceModel.pictures.length; i++) {
@@ -39,10 +39,13 @@ export class PlaceService {
 
     const createPlaceUrl = this.baseUrl + "/places/create";
     const token = this.authService.getToken();
-    return this.http.post(createPlaceUrl, formData, {headers: {"Authorization": `Bearer ${token}`}});
+    return this.http.post(createPlaceUrl, formData, { headers: { "Authorization": `Bearer ${token}` } })
+      .pipe(
+        catchError(handleHttpError<any>("Create place", null))
+      );
   }
 
-  rate(ratePlaceModel: IRatePlace): Observable<any>{
+  rate(ratePlaceModel: IRatePlace): Observable<any> {
     const placeId = ratePlaceModel.placeId;
     const cityId = ratePlaceModel.cityId;
     const userId = ratePlaceModel.userId;
@@ -54,6 +57,9 @@ export class PlaceService {
       rating: rating
     };
 
-    return this.http.post(ratePlaceUrl, body);
+    return this.http.post(ratePlaceUrl, body)
+      .pipe(
+        catchError(handleHttpError<any>("Rate place", null))
+      );
   }
 }
