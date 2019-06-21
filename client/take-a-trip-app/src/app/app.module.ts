@@ -8,14 +8,12 @@ import { TripModule } from './modules/trip/trip.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { BrowserComponent } from './components/browser/browser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    NotFoundComponent,
-    BrowserComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

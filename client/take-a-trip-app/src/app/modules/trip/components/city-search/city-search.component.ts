@@ -5,11 +5,11 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CityService } from 'src/app/services/city.service';
 
 @Component({
-  selector: 'app-browser',
-  templateUrl: './browser.component.html',
-  styleUrls: ['./browser.component.scss']
+  selector: 'app-city-search',
+  templateUrl: './city-search.component.html',
+  styleUrls: ['./city-search.component.scss']
 })
-export class BrowserComponent implements OnInit {
+export class CitySearchComponent implements OnInit {
   cities$: Observable<ICity[]>;
   private browseTerms = new Subject<string>();
 
@@ -23,7 +23,7 @@ export class BrowserComponent implements OnInit {
     );
   }
 
-  browse(browseValue: string){
+  browse(browseValue: string) {
     this.browseTerms.next(browseValue);
   }
 }
