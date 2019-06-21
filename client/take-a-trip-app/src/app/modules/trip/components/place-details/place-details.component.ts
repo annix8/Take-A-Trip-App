@@ -27,12 +27,12 @@ export class PlaceDetailsComponent implements OnInit {
       });
   }
 
-  handleRatingClick(rating: number){
+  handleRatingClick(rating: number) {
     this.placeService.rate({
       userId: "5d06adc74b9fff42ac068fa2",
-        cityId: "5d06adcf4b9fff42ac068fa3",
-        placeId: this.place._id,
-        rating: rating
+      cityId: "5d06adcf4b9fff42ac068fa3",
+      placeId: this.place._id,
+      rating: rating
     }).subscribe(x => console.log(x));
   }
 

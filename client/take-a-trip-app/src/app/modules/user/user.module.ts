@@ -12,9 +12,6 @@ import { UserRoutingModule } from './user-routing.module';
     CommonModule,
     FormsModule,
     UserRoutingModule
-  ],
-  exports: [
-    LoginComponent
   ]
 })
 export class UserModule { }
