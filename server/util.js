@@ -8,10 +8,13 @@ class Util {
         }
         else {
             const token = auth.split(' ')[1];
-            const isTokenValid = jwtService.validateToken(token);
-            if (!isTokenValid.success) {
+            const decodedToken = jwtService.validateToken(token);
+            if (!decodedToken.success) {
                 return res.status(401).send({ success: false, error: "Unauthorized. Invalid json web token" });
             }
+
+            res.locals.token_payload = decodedToken.response.payload;
+
             return next();
         }
     }

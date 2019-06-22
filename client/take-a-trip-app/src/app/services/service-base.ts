@@ -14,10 +14,11 @@ export abstract class ServiceBase {
     // TODO: catchError !
     constructor(private http: HttpClient) { }
 
-    protected get<T>(url): Observable<T> {
-        return this.http.get<IServerResponse<T>>(url)
+    protected get<T>(url, options = {}): Observable<T> {
+        return this.http.get<IServerResponse<T>>(url, options)
             .pipe(
-                map(result => {
+                map(x => {
+                    const result = x as unknown as IServerResponse<any>;
                     if (!result.success) {
                         throw new Error(JSON.stringify(result.response));
                     }

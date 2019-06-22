@@ -3,13 +3,13 @@ const util = require('../../../util');
 
 class UserController {
     constructor(router) {
-        router.get('/:id/ratingForPlace/:placeId', this.getRatingForPlace.bind(this));
+        router.get('/ratingForPlace/:placeId', util.requireJwt.bind(this), this.getRatingForPlace.bind(this));
     }
 
-    // TODO: maybe get user id from jwt
     getRatingForPlace(req, res) {
+        const tokenPayload = res.locals.token_payload;
         const userObj = {
-            userId: req.params.id,
+            userId: tokenPayload.user_id,
             placeId: req.params.placeId
         }
         userRepository.getRatingForPlace(userObj, (err, rating) => {

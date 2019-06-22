@@ -33,9 +33,10 @@ export class PlaceDetailsComponent implements OnInit {
         });
       });
 
-    this.userService.getUserRatingForPlace(this.authService.getUserId(), placeId)
+    this.userService.getUserRatingForPlace(placeId)
       .subscribe(rating => this.userGivenRating = rating);
 
+      // TODO: Show overall rating always, show user rating when user is logged
     this.showRatingComponent = this.authService.isLoggedIn();
   }
 

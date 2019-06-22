@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ServiceBase } from './service-base';
+import { AuthenticationService } from './authentication.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService extends ServiceBase {
 
-  getUserRatingForPlace(userId: string, placeId: string) {
-    const url = this.baseUrl + `/users/${userId}/ratingForPlace/${placeId}`;
+  constructor(private authService: AuthenticationService,
+    http: HttpClient) {
+    super(http);
+  }
 
-    return super.get<number>(url);
+  getUserRatingForPlace(placeId: string) {
+    const url = this.baseUrl + `/users/ratingForPlace/${placeId}`;
+    const token = this.authService.getToken();
+
+    return super.get<number>(url, { headers: { "Authorization": `Bearer ${token}` } });
   }
 }
