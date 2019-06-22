@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const util = require('../util');
 
 const jwt_secret = "jwt_secret";
 
@@ -14,10 +13,18 @@ class JwtService {
     validateToken(token) {
         try {
             const payload = jwt.verify(token, jwt_secret);
-            return util.createResponseObject(true, { payload: payload });
+            return {
+                success: true,
+                response: {
+                    payload: payload
+                }
+            };
         }
         catch (err) {
-            return util.createResponseObject(false, err.message);
+            return {
+                success: false,
+                response: err.message
+            };
         }
     }
 }
