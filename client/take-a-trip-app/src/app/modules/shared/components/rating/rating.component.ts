@@ -15,8 +15,7 @@ export class RatingComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // TODO: fix how rating is displayed: overall rating and current user input rating
+  
   handleRateClick(ngbRating){
     const rating = ngbRating.rate;
     this.rate.emit(rating);
