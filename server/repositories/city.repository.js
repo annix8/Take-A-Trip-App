@@ -72,6 +72,10 @@ function setRatingToPlace(place, userId, newRating) {
 }
 
 function getPlaceAverageRating(place) {
+    if (place.ratings.length === 0) {
+        return 0;
+    }
+
     return place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length;
 }
 
