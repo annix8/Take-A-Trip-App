@@ -1,15 +1,17 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { RatingComponent } from './components/rating/rating.component';
-import { environment } from 'src/environments/environment';
+
 import { TOKEN_KEY } from 'src/app/util/constants';
+import { environment } from 'src/environments/environment';
+
 
 function tokenGetter() {
   return localStorage.getItem(TOKEN_KEY);

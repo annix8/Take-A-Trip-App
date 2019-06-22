@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ICity } from 'src/app/models/city';
-import { debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { CityService } from 'src/app/services/city.service';
-import { handleHttpError } from 'src/app/util/http-util';
 
 @Component({
   selector: 'app-city-search',

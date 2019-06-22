@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ICity } from 'src/app/models/city';
 import { ActivatedRoute } from '@angular/router';
+import { ICity } from 'src/app/models/city';
 import { CityService } from 'src/app/services/city.service';
 
 @Component({
