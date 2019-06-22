@@ -8,22 +8,22 @@ import { catchError } from 'rxjs/operators';
 import { ICreatePlace } from '../models/create-place';
 import { AuthenticationService } from './authentication.service';
 import { IRatePlace } from '../models/rate-place';
+import { ServiceBase } from './service-base';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PlaceService {
-  baseUrl = environment.apiUrl;
+export class PlaceService extends ServiceBase {
 
-  constructor(private http: HttpClient,
-    private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService,
+    http: HttpClient) {
+    super(http);
+  }
 
   getById(placeId: string): Observable<IPlace> {
     const placeUrl = this.baseUrl + "/places/" + placeId;
-    return this.http.get<IPlace>(placeUrl)
-      .pipe(
-        catchError(handleHttpError<IPlace>("Get place by id", null))
-      );
+
+    return super.get<IPlace>(placeUrl);
   }
 
   create(createPlaceModel: ICreatePlace) {
@@ -39,7 +39,7 @@ export class PlaceService {
 
     const createPlaceUrl = this.baseUrl + "/places/create";
     const token = this.authService.getToken();
-    return this.http.post(createPlaceUrl, formData, { headers: { "Authorization": `Bearer ${token}` } })
+    return super.post(createPlaceUrl, formData, { headers: { "Authorization": `Bearer ${token}` } })
       .pipe(
         catchError(handleHttpError<any>("Create place", null))
       );
@@ -56,7 +56,7 @@ export class PlaceService {
     };
 
     const token = this.authService.getToken();
-    return this.http.post(ratePlaceUrl, body, { headers: { "Authorization": `Bearer ${token}` } })
+    return super.post(ratePlaceUrl, body, { headers: { "Authorization": `Bearer ${token}` } })
       .pipe(
         catchError(handleHttpError<any>("Rate place", null))
       );

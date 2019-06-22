@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CityService } from 'src/app/services/city.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ICity } from 'src/app/models/city';
 import { ICreatePlace } from 'src/app/models/create-place';
 import { PlaceService } from 'src/app/services/place.service';
 import { NgForm } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-place',
