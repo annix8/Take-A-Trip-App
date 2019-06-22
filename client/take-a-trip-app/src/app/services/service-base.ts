@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 export abstract class ServiceBase {
     protected baseUrl = environment.apiUrl;
 
+    // TODO: catchError !
     constructor(private http: HttpClient) { }
 
     protected get<T>(url): Observable<T> {

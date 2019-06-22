@@ -44,23 +44,20 @@ export class PlaceDetailsComponent implements OnInit {
       placeId: this.place._id,
       rating: rating
     }).subscribe(result => {
-      if (!result) {
-        Swal.fire({
-          text: "Unexpected error",
-          title: "Error",
-          type: "error"
-        });
-
-        return;
-      }
-
-      this.place.rating = result.place.rating;
+      this.place.rating = result.response.rating;
       Swal.fire({
         text: `You have rated: ${rating}`,
         title: "Success",
         type: "success"
       });
-    });
+    },
+      error => {
+        Swal.fire({
+          text: "Unexpected error",
+          title: "Error",
+          type: "error"
+        });
+      });
   }
 
 }

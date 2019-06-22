@@ -8,7 +8,7 @@ class PlaceRatingService {
             const ratePlaceObj = {
                 userId: rateObj.userId,
                 placeId: rateObj.placeId,
-                placeName: cityUpdateResult.place.name,
+                placeName: cityUpdateResult.name,
                 rating: rateObj.rating
             };
 
