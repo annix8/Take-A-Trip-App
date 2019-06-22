@@ -1,6 +1,5 @@
 const cityRepository = require('../repositories/city.repository');
 const userRepository = require('../repositories/user.repository');
-const util = require('../util');
 
 class PlaceRatingService {
     rate(rateObj = { userId, placeId, rating }, callback) {
