@@ -5,7 +5,7 @@ import { ICity } from 'src/app/models/city';
 import { ICreatePlace } from 'src/app/models/create-place';
 import { PlaceService } from 'src/app/services/place.service';
 import { NgForm } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-place',
@@ -14,9 +14,6 @@ import { catchError } from 'rxjs/operators';
 })
 export class CreatePlaceComponent implements OnInit {
   cities$: Observable<ICity[]>;
-  showAlertMessage: boolean;
-  alertMessage: string;
-  alertSuccess: boolean;
   createPlaceModel: ICreatePlace = {
     placeName: "",
     cityId: "",
@@ -39,35 +36,24 @@ export class CreatePlaceComponent implements OnInit {
     }
   }
 
-  closeAlert() {
-    this.showAlertMessage = false;
-  }
-
-  setAlertClasses() {
-    return {
-      "alert": true,
-      "alert-success": this.alertSuccess,
-      "alert-danger": !this.alertSuccess,
-      "alert-dismissible ": true,
-      "fade": true,
-      "show": true
-    };
-  }
-
   onSubmit() {
     // TODO: Add validation
     this.placeService.create(this.createPlaceModel)
       .subscribe(
         result => {
           this.createPlaceForm.reset();
-          this.showAlertMessage = true;
-          this.alertSuccess = true;
-          this.alertMessage = "Successfully created.";
+          Swal.fire({
+            text: `Successfully created.`,
+            title: "Success",
+            type: "success"
+          });
         },
         error => {
-          this.showAlertMessage = true;
-          this.alertSuccess = false;
-          this.alertMessage = "An error occured " + error.message;
+          Swal.fire({
+            text: `An error occured ${error.message}`,
+            title: "Error",
+            type: "error"
+          });
         }
       );
   }

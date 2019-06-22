@@ -1,12 +1,5 @@
 <div class="container">
 
-  <div [ngClass]="setAlertClasses()" role="alert" *ngIf="showAlertMessage">
-    {{alertMessage}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-
   <form #form="ngForm">
     <div class="form-group">
       <label for="placeName">Name</label>

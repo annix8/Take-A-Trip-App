@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginFailed: boolean;
-  message: string;
 
   constructor(private authService: AuthenticationService,
     private router: Router) { }
@@ -20,22 +19,23 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password)
       .subscribe(result => {
         if (result.success === true) {
-          this.loginFailed = false;
           this.router.navigate(["/"]);
         }
         else {
-          this.loginFailed = true;
-          this.message = JSON.stringify(result.error);
+          Swal.fire({
+            text: result.response,
+            title: "Error",
+            type: "error"
+          });
         }
       },
         err => {
-          this.loginFailed = true;
-          this.message = JSON.stringify(err);
+          Swal.fire({
+            text: `An error occured ${err}`,
+            title: "Error",
+            type: "error"
+          });
         }
       )
-  }
-
-  closeAlert() {
-    this.loginFailed = false;
   }
 }
