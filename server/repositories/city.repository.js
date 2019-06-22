@@ -21,7 +21,7 @@ class CityRepository {
                 address: place.address,
                 name: place.name,
                 images: place.images,
-                rating: place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length
+                rating: getPlaceAverageRating(place)
             };
 
             callback(err, result);
@@ -48,11 +48,14 @@ class CityRepository {
             const cityCopy = city.toJSON();
             const place = cityCopy.places.find(x => x._id == placeId);
             const allOtherPlaces = cityCopy.places.filter(place => place._id != placeId);
-            allOtherPlaces.push(setRatingToPlace(place, userId, rating));
+            const ratedPlace = setRatingToPlace(place, userId, rating);
+            allOtherPlaces.push(ratedPlace);
             city.places = allOtherPlaces;
             city.save();
 
-            callback({ success: true, place: place });
+            ratedPlace.rating = getPlaceAverageRating(ratedPlace);
+            delete ratedPlace.ratings;
+            callback({ success: true, place: ratedPlace });
         });
     }
 }
@@ -66,6 +69,10 @@ function setRatingToPlace(place, userId, newRating) {
     place.ratings = ratings;
 
     return place;
+}
+
+function getPlaceAverageRating(place) {
+    return place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length;
 }
 
 module.exports = new CityRepository();

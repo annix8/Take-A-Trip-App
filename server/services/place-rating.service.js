@@ -13,7 +13,7 @@ class PlaceRatingService {
                 };
 
                 userRepository.ratePlace(ratePlaceObj, (userRateResult) => {
-                    callback(null, userRateResult);
+                    callback(null, cityUpdateResult);
                 });
             }
             else {

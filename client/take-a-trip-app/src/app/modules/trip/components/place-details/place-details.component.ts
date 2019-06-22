@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IPlace } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { ActivatedRoute } from '@angular/router';
@@ -44,7 +44,7 @@ export class PlaceDetailsComponent implements OnInit {
       placeId: this.place._id,
       rating: rating
     }).subscribe(result => {
-      if(!result){
+      if (!result) {
         Swal.fire({
           text: "Unexpected error",
           title: "Error",
@@ -54,6 +54,7 @@ export class PlaceDetailsComponent implements OnInit {
         return;
       }
 
+      this.place.rating = result.place.rating;
       Swal.fire({
         text: `You have rated: ${rating}`,
         title: "Success",
