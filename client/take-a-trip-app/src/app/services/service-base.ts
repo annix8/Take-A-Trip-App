@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { map, tap, switchAll, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { IServerResponse } from '../models/server-response';
 import { Injectable } from '@angular/core';
@@ -11,7 +11,6 @@ import { Injectable } from '@angular/core';
 export abstract class ServiceBase {
     protected baseUrl = environment.apiUrl;
 
-    // TODO: catchError !
     constructor(private http: HttpClient) { }
 
     protected get<T>(url, options = {}): Observable<T> {
@@ -24,6 +23,9 @@ export abstract class ServiceBase {
                     }
 
                     return result.response;
+                }),
+                catchError(error => {
+                    throw new Error(JSON.stringify(error));
                 })
             );
     }
@@ -38,6 +40,9 @@ export abstract class ServiceBase {
                     }
 
                     return result;
+                }),
+                catchError(error => {
+                    throw new Error(JSON.stringify(error));
                 })
             );
     }
