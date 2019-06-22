@@ -42,11 +42,9 @@ export class PlaceService extends ServiceBase {
 
   rate(ratePlaceModel: IRatePlace): Observable<any> {
     const placeId = ratePlaceModel.placeId;
-    const userId = ratePlaceModel.userId;
     const rating = ratePlaceModel.rating;
     const ratePlaceUrl = this.baseUrl + `/places/${placeId}/rate`;
     const body = {
-      userId: userId,
       rating: rating
     };
 

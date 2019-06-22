@@ -36,9 +36,9 @@ class PlaceController {
     rate(req, res) {
         const placeId = req.params.id;
         const rating = req.body.rating;
-        const userId = req.body.userId;
+        const tokenPayload = res.locals.token_payload;
+        const userId = tokenPayload.user_id;
 
-        // TODO: maybe take userId from jwt?
         if (!placeId || !rating || !userId) {
             return util.handleJsonResponse(res, null, util.createResponseObject(false, "Rating, placeId, and userId are required"));
         }

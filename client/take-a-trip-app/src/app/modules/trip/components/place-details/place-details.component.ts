@@ -38,7 +38,6 @@ export class PlaceDetailsComponent implements OnInit {
 
   handleRatingClick(rating: number) {
     this.placeService.rate({
-      userId: this.authService.getUserId(),
       placeId: this.place._id,
       rating: rating
     }).subscribe(result => {
