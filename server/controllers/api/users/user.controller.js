@@ -6,13 +6,14 @@ class UserController {
         router.get('/:id/ratingForPlace/:placeId', this.getRatingForPlace.bind(this));
     }
 
-    getRatingForPlace(req, res){
+    // TODO: maybe get user id from jwt
+    getRatingForPlace(req, res) {
         const userObj = {
             userId: req.params.id,
             placeId: req.params.placeId
         }
-        userRepository.getRatingForPlace(userObj, (err, rating) =>{
-            util.handleJsonResponse(res, err, rating);
+        userRepository.getRatingForPlace(userObj, (err, rating) => {
+            util.handleJsonResponse(res, err, util.createResponseObject(true, rating));
         });
     }
 }

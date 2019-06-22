@@ -28,7 +28,7 @@ class UserRepository {
             user.ratedPlaces = allOtherPlaces;
 
             user.save();
-            callback({ success: true });
+            callback(null, user);
         });
     }
 

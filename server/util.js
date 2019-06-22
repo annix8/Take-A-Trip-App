@@ -43,6 +43,13 @@ class Util {
 
         return excludeParams;
     }
+
+    createResponseObject(isSuccess, responseBody) {
+        return {
+            success: isSuccess,
+            response: responseBody
+        };
+    }
 }
 
 module.exports = new Util();

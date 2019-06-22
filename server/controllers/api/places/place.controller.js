@@ -15,7 +15,7 @@ class PlaceController {
 
     getById(req, res) {
         cityRepository.getPlaceById(req.params.id, (err, place) => {
-            return util.handleJsonResponse(res, err, place);
+            return util.handleJsonResponse(res, err, util.createResponseObject(true, place));
         });
     }
 
@@ -28,8 +28,8 @@ class PlaceController {
             images: req.files
         };
 
-        cityRepository.createPlace(place, (err, city) => {
-            return util.handleJsonResponse(res, err, { "success": true });
+        cityRepository.createPlace(place, (err, place) => {
+            return util.handleJsonResponse(res, err, util.createResponseObject(true, place));
         });
     }
 
@@ -40,7 +40,7 @@ class PlaceController {
 
         // TODO: maybe take userId from jwt?
         if (!placeId || !rating || !userId) {
-            return util.handleJsonResponse(res, { success: false, error: "Rating, placeId, and userId are required" }, null);
+            return util.handleJsonResponse(res, null, util.createResponseObject(false, "Rating, placeId, and userId are required"));
         }
 
         const rateObj = {
@@ -48,8 +48,8 @@ class PlaceController {
             placeId: placeId,
             rating: rating
         };
-        placeRatingService.rate(rateObj, (err, success) => {
-            return util.handleJsonResponse(res, err, success);
+        placeRatingService.rate(rateObj, (err, ratedPlace) => {
+            return util.handleJsonResponse(res, err, util.createResponseObject(true, ratedPlace));
         });
     }
 }

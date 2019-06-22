@@ -6,6 +6,7 @@ import { handleHttpError } from '../util/http-util';
 import { Observable } from 'rxjs';
 import { TOKEN_KEY, USER_ID_KEY, USER_NAME_KEY } from '../util/constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { IServerResponse } from '../models/server-response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class AuthenticationService {
     public jwtHelper: JwtHelperService) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "/login", { username, password })
+    return this.http.post<IServerResponse<any>>(this.baseUrl + "/login", { username, password })
       .pipe(
         tap(result => {
           if (result.success === true) {
-            localStorage.setItem(TOKEN_KEY, result.token);
+            localStorage.setItem(TOKEN_KEY, result.response.token);
           }
         }),
         catchError(handleHttpError("Login", null))

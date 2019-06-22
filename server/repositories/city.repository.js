@@ -39,7 +39,7 @@ class CityRepository {
         City.findById(place.cityId, (err, city) => {
             city.places.push(placeModel);
             city.save();
-            callback(err, city);
+            callback(err, placeModel);
         });
     }
 
@@ -47,15 +47,15 @@ class CityRepository {
         City.findOne({ "places._id": placeId }, (err, city) => {
             const cityCopy = city.toJSON();
             const place = cityCopy.places.find(x => x._id == placeId);
-            const allOtherPlaces = cityCopy.places.filter(place => place._id != placeId);
             const ratedPlace = setRatingToPlace(place, userId, rating);
+            const allOtherPlaces = cityCopy.places.filter(place => place._id != placeId);
             allOtherPlaces.push(ratedPlace);
             city.places = allOtherPlaces;
             city.save();
 
             ratedPlace.rating = getPlaceAverageRating(ratedPlace);
             delete ratedPlace.ratings;
-            callback({ success: true, place: ratedPlace });
+            callback(null, ratedPlace);
         });
     }
 }

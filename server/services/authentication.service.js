@@ -1,11 +1,7 @@
 const passwordService = require('./password.service');
 const userRepository = require('../repositories/user.repository');
 const jwtService = require('./jwt.service');
-
-const invalidCredentialsObj = {
-    success: false,
-    error: "Invalid credentials"
-}
+const util = require('../util');
 
 class AuthenticationService {
     authenticate(username, password, callback) {
@@ -15,12 +11,12 @@ class AuthenticationService {
             }
             else {
                 if (!user) {
-                    callback(invalidCredentialsObj);
+                    callback(util.createResponseObject(false, "Invalid credentials"));
                 }
                 else {
                     const isPasswordValid = passwordService.checkPassword(password, user.password);
                     if (!isPasswordValid) {
-                        callback(invalidCredentialsObj);
+                        callback(util.createResponseObject(false, "Invalid credentials"));
                     }
                     else {
                         const result = createSuccessResult(user);
@@ -45,18 +41,15 @@ class AuthenticationService {
     }
 }
 
-function createSuccessResult(user){
+function createSuccessResult(user) {
     const userData = createUserInfoForJwt(user);
     const jwtBearerToken = jwtService.signToken(userData);
-    const result = {
-        success: true,
-        token: jwtBearerToken
-    };
+    const result = util.createResponseObject(true, { token: jwtBearerToken });
 
     return result;
 }
 
-function createUserInfoForJwt(user){
+function createUserInfoForJwt(user) {
     const userObj = {
         user_name: user.username,
         user_email: user.email,
