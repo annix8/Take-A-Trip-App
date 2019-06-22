@@ -55,7 +55,8 @@ export class PlaceService {
       rating: rating
     };
 
-    return this.http.post(ratePlaceUrl, body)
+    const token = this.authService.getToken();
+    return this.http.post(ratePlaceUrl, body, { headers: { "Authorization": `Bearer ${token}` } })
       .pipe(
         catchError(handleHttpError<any>("Rate place", null))
       );
