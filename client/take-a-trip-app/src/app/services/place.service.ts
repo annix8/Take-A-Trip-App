@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPlace } from '../models/place';
-import { handleHttpError } from '../util/http-util';
-import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
 import { ICreatePlace } from '../models/create-place';
 import { AuthenticationService } from './authentication.service';
 import { IRatePlace } from '../models/rate-place';
@@ -39,10 +36,8 @@ export class PlaceService extends ServiceBase {
 
     const createPlaceUrl = this.baseUrl + "/places/create";
     const token = this.authService.getToken();
-    return super.post(createPlaceUrl, formData, { headers: { "Authorization": `Bearer ${token}` } })
-      .pipe(
-        catchError(handleHttpError<any>("Create place", null))
-      );
+
+    return super.post(createPlaceUrl, formData, { headers: { "Authorization": `Bearer ${token}` } });
   }
 
   rate(ratePlaceModel: IRatePlace): Observable<any> {
@@ -56,9 +51,7 @@ export class PlaceService extends ServiceBase {
     };
 
     const token = this.authService.getToken();
-    return super.post(ratePlaceUrl, body, { headers: { "Authorization": `Bearer ${token}` } })
-      .pipe(
-        catchError(handleHttpError<any>("Rate place", null))
-      );
+
+    return super.post(ratePlaceUrl, body, { headers: { "Authorization": `Bearer ${token}` } });
   }
 }

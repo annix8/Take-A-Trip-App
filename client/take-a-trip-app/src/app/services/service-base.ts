@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, switchAll, switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { IServerResponse } from '../models/server-response';
 import { Injectable } from '@angular/core';
@@ -28,6 +28,16 @@ export abstract class ServiceBase {
     }
 
     protected post(url, body, options) {
-        return this.http.post(url, body, options);
+        return this.http.post<IServerResponse<any>>(url, body, options)
+            .pipe(
+                map(x => {
+                    const result = x as unknown as IServerResponse<any>;
+                    if (!result.success) {
+                        throw new Error(JSON.stringify(result.response));
+                    }
+
+                    return result;
+                })
+            );
     }
 }

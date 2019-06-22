@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { IPlace } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +20,8 @@ export class PlaceDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private placeService: PlaceService,
     private userService: UserService,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService,
+    private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit() {
     const placeId = this.route.snapshot.paramMap.get("id");
@@ -52,8 +53,14 @@ export class PlaceDetailsComponent implements OnInit {
       });
     },
       error => {
+        // if there is an error change and rollback user rating with change detection so that the rating is not changed
+        const userGivenRatingCopy = this.userGivenRating;
+        this.userGivenRating = 1;
+        this.changeDetection.detectChanges();
+        this.userGivenRating = userGivenRatingCopy;
+
         Swal.fire({
-          text: "Unexpected error",
+          text: error,
           title: "Error",
           type: "error"
         });
