@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ServiceBase } from './service-base';
 import { AuthenticationService } from './authentication.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class UserService extends ServiceBase {
     super(http);
   }
 
-  getUserRatingForPlace(placeId: string) {
+  getUserRatingForPlace(placeId: string): Observable<number> {
+    if (!this.authService.isLoggedIn()) {
+      return of(-1);
+    }
+
     const url = this.baseUrl + `/users/ratingForPlace/${placeId}`;
     const token = this.authService.getToken();
 
