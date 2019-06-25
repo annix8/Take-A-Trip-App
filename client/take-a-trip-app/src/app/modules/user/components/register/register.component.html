@@ -1,3 +1,20 @@
-<p>
-  register works!
-</p>
+<div class="container">
+
+  <form #form="ngForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" #usernameInput class="form-control" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" #emailInput class="form-control" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" #passwordInput class="form-control" name="password" placeholder="Password" name="password"
+        required>
+    </div>
+    <button class="btn btn-primary" (click)="onSubmit(usernameInput.value, emailInputValue.value, passwordInput.value)">Register</button>
+  </form>
+
+</div>
