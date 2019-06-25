@@ -29,6 +29,18 @@ export class AuthenticationService {
       );
   }
 
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post<IServerResponse<any>>(this.baseUrl + "/register", { username, email, password })
+      .pipe(
+        tap(result => {
+          if (result.success === true) {
+            localStorage.setItem(TOKEN_KEY, result.response.token);
+          }
+        }),
+        catchError(handleHttpError("Login", null))
+      );
+  }
+
   logout() {
     localStorage.removeItem(TOKEN_KEY);
   }
