@@ -76,7 +76,8 @@ function getPlaceAverageRating(place) {
         return 0;
     }
 
-    return place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length;
+    const rating = place.ratings.reduce((acc, rating) => acc + rating.rating, 0) / place.ratings.length;
+    return parseFloat(rating.toFixed(2));
 }
 
 module.exports = new CityRepository();
