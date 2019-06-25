@@ -31,6 +31,10 @@ class AuthenticationService {
         userRepository.create(username, email, passwordService.hashPassword(password),
             (err, user) => {
                 if (err) {
+                    if (err.code === 11000) {
+                        return callback(util.createResponseObject(false, "Already existing username or email"));
+                    }
+
                     callback(err);
                 }
                 else {
