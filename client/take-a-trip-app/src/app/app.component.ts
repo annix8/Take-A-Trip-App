@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,28 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   constructor(private authService: AuthenticationService,
-    private router: Router){
+    private router: Router) {
 
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
-    this.router.navigateByUrl("/");
+    Swal.fire({
+      title: 'Success',
+      type: 'success',
+      text: 'You have successfully logged out',
+      timer: 2500,
+      onClose: () => {
+        this.router.navigateByUrl("/");
+      }
+    });
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     return this.authService.isLoggedIn();
   }
 
-  getUsername(){
+  getUsername() {
     return this.authService.getUsername();
   }
 }
