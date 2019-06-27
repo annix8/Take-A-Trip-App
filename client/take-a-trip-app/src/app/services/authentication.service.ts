@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { handleHttpError } from '../util/http-util';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { TOKEN_KEY, USER_ID_KEY, USER_NAME_KEY } from '../util/constants';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { IServerResponse } from '../models/server-response';
@@ -41,8 +41,10 @@ export class AuthenticationService {
       );
   }
 
-  logout() {
-    localStorage.removeItem(TOKEN_KEY);
+  logout(): Observable<any> {
+    localStorage.clear();
+
+    return of({});
   }
 
   isLoggedIn(): boolean {

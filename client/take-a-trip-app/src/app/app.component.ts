@@ -15,15 +15,8 @@ export class AppComponent {
   }
 
   logout() {
-    this.authService.logout();
-    Swal.fire({
-      title: 'Success',
-      type: 'success',
-      text: 'You have successfully logged out',
-      timer: 2500,
-      onClose: () => {
-        this.router.navigateByUrl("/");
-      }
+    this.authService.logout().subscribe(() => {
+      this.fireSwalSuccess();
     });
   }
 
@@ -33,5 +26,17 @@ export class AppComponent {
 
   getUsername() {
     return this.authService.getUsername();
+  }
+
+  private fireSwalSuccess() {
+    Swal.fire({
+      title: 'Success',
+      type: 'success',
+      text: 'You have successfully logged out',
+      timer: 2500,
+      onClose: () => {
+        this.router.navigateByUrl("/");
+      }
+    });
   }
 }
