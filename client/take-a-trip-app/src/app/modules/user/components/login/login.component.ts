@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { swalError } from 'src/app/util/swal-util';
 
 @Component({
   templateUrl: './login.component.html',
@@ -22,19 +22,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/"]);
         }
         else {
-          Swal.fire({
-            text: result.response,
-            title: "Error",
-            type: "error"
-          });
+          swalError(result.response);
         }
       },
         err => {
-          Swal.fire({
-            text: `An error occured ${err}`,
-            title: "Error",
-            type: "error"
-          });
+          swalError(`An error occured ${err}`);
         }
       )
   }

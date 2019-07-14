@@ -5,7 +5,7 @@ import { ICity } from 'src/app/models/city';
 import { ICreatePlace } from 'src/app/models/create-place';
 import { PlaceService } from 'src/app/services/place.service';
 import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2';
+import { swalSuccess, swalError } from 'src/app/util/swal-util';
 
 @Component({
   selector: 'app-create-place',
@@ -42,18 +42,10 @@ export class CreatePlaceComponent implements OnInit {
       .subscribe(
         result => {
           this.createPlaceForm.reset();
-          Swal.fire({
-            text: `Successfully created.`,
-            title: "Success",
-            type: "success"
-          });
+          swalSuccess("Successfully created.");
         },
         error => {
-          Swal.fire({
-            text: `An error occured ${error.message}`,
-            title: "Error",
-            type: "error"
-          });
+          swalError(`An error occured ${error.message}`);;
         }
       );
   }

@@ -4,7 +4,7 @@ import { PlaceService } from 'src/app/services/place.service';
 import { ActivatedRoute } from '@angular/router';
 import { ICarouselImage } from 'src/app/models/carousel-image';
 import { UserService } from 'src/app/services/user.service';
-import Swal from 'sweetalert2';
+import { swalSuccess, swalError } from 'src/app/util/swal-util';
 
 @Component({
   templateUrl: './place-details.component.html',
@@ -40,11 +40,7 @@ export class PlaceDetailsComponent implements OnInit {
       rating: rating
     }).subscribe(result => {
       this.place.rating = result.response.rating;
-      Swal.fire({
-        text: `You have rated: ${rating}`,
-        title: "Success",
-        type: "success"
-      });
+      swalSuccess(`You have rated: ${rating}`);
     },
       error => {
         // if there is an error change and rollback user rating with change detection so that the rating is not changed
@@ -53,11 +49,7 @@ export class PlaceDetailsComponent implements OnInit {
         this.changeDetection.detectChanges();
         this.userGivenRating = userGivenRatingCopy;
 
-        Swal.fire({
-          text: error,
-          title: "Error",
-          type: "error"
-        });
+        swalError(error);
       });
   }
 
