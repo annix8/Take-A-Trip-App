@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { swalSuccessWithTimer } from './util/swal-util';
 
 @Component({

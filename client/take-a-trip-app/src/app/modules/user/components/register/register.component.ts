@@ -16,6 +16,11 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(username: string, email: string, password: string) {
+    let isValid: boolean = this.validateRegistrationData(username, email, password);
+    if (!isValid) {
+      return;
+    }
+
     this.authService.register(username, email, password)
       .subscribe(result => {
         if (result.success === true) {
@@ -29,5 +34,14 @@ export class RegisterComponent implements OnInit {
           swalError(`An error occured ${err}`);
         }
       )
+  }
+
+  private validateRegistrationData(username: string, email: string, password: string): boolean {
+    if (!username || !email || !password) {
+      swalError("Required username, email and password")
+      return false;
+    }
+
+    return true;
   }
 }
