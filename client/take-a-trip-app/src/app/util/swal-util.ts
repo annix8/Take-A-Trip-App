@@ -15,3 +15,15 @@ export function swalError(message: string) {
         type: "error"
     });
 }
+
+export function swalSuccessWithTimer(message: string, callback: any, timer = 2500) {
+    Swal.fire({
+        title: 'Success',
+        type: 'success',
+        text: message,
+        timer: timer,
+        onClose: () => {
+            callback();
+        }
+    });
+}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { swalSuccessWithTimer } from './util/swal-util';
 
 @Component({
   selector: 'app-root',
@@ -29,14 +30,8 @@ export class AppComponent {
   }
 
   private fireSwalSuccess() {
-    Swal.fire({
-      title: 'Success',
-      type: 'success',
-      text: 'You have successfully logged out',
-      timer: 2500,
-      onClose: () => {
-        this.router.navigateByUrl("/");
-      }
-    });
+    swalSuccessWithTimer('You have successfully logged out', () => {
+      this.router.navigateByUrl("/");
+    })
   }
 }
