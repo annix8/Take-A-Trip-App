@@ -12,8 +12,8 @@ export class HereMapComponent implements OnInit {
   private ui: any;
   private map: any;
 
-  @Input() latitute: number;
-  @Input() longtitude: number;
+  @Input() latitude: number;
+  @Input() longitude : number;
   @ViewChild("map") public mapElement: ElementRef;
 
   constructor() { }
@@ -26,7 +26,7 @@ export class HereMapComponent implements OnInit {
 
   public ngAfterViewInit() {
     this.initMap();
-    this.dropMarker({ "lat": this.latitute, "lng": this.longtitude });    
+    this.dropMarker({ "lat": this.latitude, "lng": this.longitude });    
   }
 
   private initMap() {
@@ -35,8 +35,8 @@ export class HereMapComponent implements OnInit {
       this.mapElement.nativeElement,
       defaultLayers.vector.normal.map,
       {
-        zoom: 10,
-        center: { lat: this.latitute, lng: this.longtitude }
+        zoom: 14,
+        center: { lat: this.latitude, lng: this.longitude }
       }
     );
 
