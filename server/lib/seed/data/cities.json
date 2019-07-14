@@ -13,15 +13,11 @@
             },
             {
                 "name": "National Palace of Culture",
-                "imgs": [],
+                "imgs": [
+                    "../images/ndk.jpg"
+                ],
                 "latitude": 42.68416393,
                 "longitude": 23.317998728
-            },
-            {
-                "name": "Zoo",
-                "imgs": [],
-                "latitude": 42.654830714,
-                "longitude": 23.32583203
             }
         ],
         "country": "Bulgaria"
@@ -31,15 +27,11 @@
         "places": [
             {
                 "name": "Palace of Culture",
-                "imgs": []
-            },
-            {
-                "name": "Minyor Pernik Stadium",
-                "imgs": []
-            },
-            {
-                "name": "Pernik park",
-                "imgs": []
+                "imgs": [
+                    "../images/pernik-palace-of-culture.jpg"
+                ],
+                "latitude": 42.606552,
+                "longitude": 23.029029
             }
         ],
         "country": "Bulgaria"
