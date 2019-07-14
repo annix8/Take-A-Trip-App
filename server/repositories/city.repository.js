@@ -17,10 +17,7 @@ class CityRepository {
             });
 
             const result = {
-                _id: place._id,
-                address: place.address,
-                name: place.name,
-                images: place.images,
+                ...place,
                 rating: getPlaceAverageRating(place)
             };
 

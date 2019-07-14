@@ -8,4 +8,4 @@
   <app-rating (rate)="handleRatingClick($event)" [totalRating]="place.rating" [givenRating]="userGivenRating">
   </app-rating>
 </div>
-<app-here-map [latitude]="42.695808" [longitude]="23.332794"></app-here-map>
+<app-here-map *ngIf="place" [latitude]="place.latitude" [longitude]="place.longitude"></app-here-map>

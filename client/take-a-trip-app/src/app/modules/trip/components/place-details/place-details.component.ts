@@ -3,7 +3,6 @@ import { IPlace } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { ActivatedRoute } from '@angular/router';
 import { ICarouselImage } from 'src/app/models/carousel-image';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -19,7 +18,6 @@ export class PlaceDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private placeService: PlaceService,
     private userService: UserService,
-    private authService: AuthenticationService,
     private changeDetection: ChangeDetectorRef) { }
 
   ngOnInit() {
