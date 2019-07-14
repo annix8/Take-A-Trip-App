@@ -27,7 +27,7 @@ export class HereMapComponent implements OnInit {
       defaultLayers.vector.normal.map,
       {
         zoom: 10,
-        center: { lat: 37.7397, lng: -121.4252 }
+        center: { lat: 42.695808, lng: 23.332794 }
       }
     );
     let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
@@ -37,6 +37,7 @@ export class HereMapComponent implements OnInit {
   }
 
   private dropMarker(coordinates: any, title: string) {
+    this.map.removeObjects(this.map.getObjects());
     let marker = new H.map.Marker(coordinates);
     marker.setData("<p>" + title + "</p>");
     marker.addEventListener('tap', event => {
