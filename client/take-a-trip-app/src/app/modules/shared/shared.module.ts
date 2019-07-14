@@ -40,6 +40,7 @@ function tokenGetter() {
   exports: [
     CarouselComponent,
     RatingComponent,
+    HereMapComponent,
     HttpClientModule,
     NgbModule,
     JwtModule,
