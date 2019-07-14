@@ -4,21 +4,24 @@
         "places": [
             {
                 "name": "Saint Alexander Nevsky Cathedral",
-                "address": "pl. Sveti Aleksandar Nevski, 1000 Sofia Center, Sofia",
                 "imgs": [
                     "../images/nevski-cathedral-1.jpg",
                     "../images/nevski-cathedral-2.jpg"
-                ]
+                ],
+                "latitude": 42.695808,
+                "longitude": 23.332794
             },
             {
                 "name": "National Palace of Culture",
-                "address": "Sofia 10",
-                "imgs": []
+                "imgs": [],
+                "latitude": 42.68416393,
+                "longitude": 23.317998728
             },
             {
                 "name": "Zoo",
-                "address": "Sofia Hladilnika",
-                "imgs": []
+                "imgs": [],
+                "latitude": 42.654830714,
+                "longitude": 23.32583203
             }
         ],
         "country": "Bulgaria"
@@ -28,17 +31,14 @@
         "places": [
             {
                 "name": "Palace of Culture",
-                "address": "Pernik center",
                 "imgs": []
             },
             {
                 "name": "Minyor Pernik Stadium",
-                "address": "Pernik 52",
                 "imgs": []
             },
             {
                 "name": "Pernik park",
-                "address": "Pernik 50",
                 "imgs": []
             }
         ],
