@@ -11,6 +11,7 @@ import { RatingComponent } from './components/rating/rating.component';
 
 import { TOKEN_KEY } from 'src/app/util/constants';
 import { environment } from 'src/environments/environment';
+import { HereMapComponent } from './components/here-map/here-map.component';
 
 
 function tokenGetter() {
@@ -20,7 +21,8 @@ function tokenGetter() {
 @NgModule({
   declarations: [
     CarouselComponent,
-    RatingComponent
+    RatingComponent,
+    HereMapComponent
   ],
   imports: [
     CommonModule,
