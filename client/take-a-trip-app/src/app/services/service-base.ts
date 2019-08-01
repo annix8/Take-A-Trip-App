@@ -25,7 +25,7 @@ export abstract class ServiceBase {
                     return result.response;
                 }),
                 catchError(error => {
-                    throw new Error(JSON.stringify(error));
+                    throw new Error(error.message);
                 })
             );
     }
@@ -42,7 +42,7 @@ export abstract class ServiceBase {
                     return result;
                 }),
                 catchError(error => {
-                    throw new Error(JSON.stringify(error));
+                    throw new Error(error.message);
                 })
             );
     }

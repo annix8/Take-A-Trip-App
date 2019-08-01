@@ -47,7 +47,7 @@ export class CreatePlaceComponent implements OnInit {
           swalSuccess("Successfully created.");
         },
         error => {
-          swalError(`An error occured ${error.message}`);;
+          swalError(`An error occured: ${error}`);;
         }
       );
   }
