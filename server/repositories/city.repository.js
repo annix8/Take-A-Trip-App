@@ -30,6 +30,8 @@ class CityRepository {
         const placeModel = {
             name: place.name,
             address: place.address,
+            latitude: place.latitude,
+            longitude: place.longitude,
             images: imageIds
         }
 

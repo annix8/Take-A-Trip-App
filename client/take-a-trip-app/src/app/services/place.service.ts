@@ -33,6 +33,8 @@ export class PlaceService extends ServiceBase {
     formData.append("placeName", createPlaceModel.placeName);
     formData.append("placeAddress", createPlaceModel.placeAddress);
     formData.append("cityId", createPlaceModel.cityId);
+    formData.append("latitude", createPlaceModel.latitude.toString());
+    formData.append("longitude", createPlaceModel.longitude.toString());
 
     const createPlaceUrl = this.baseUrl + "/places/create";
     const token = this.authService.getToken();

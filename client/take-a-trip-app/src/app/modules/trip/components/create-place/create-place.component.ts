@@ -18,6 +18,8 @@ export class CreatePlaceComponent implements OnInit {
     placeName: "",
     cityId: "",
     placeAddress: "",
+    latitude: 0,
+    longitude: 0,
     pictures: []
   };
   @ViewChild('form') public createPlaceForm: NgForm;

@@ -25,6 +25,8 @@ class PlaceController {
             name: req.body.placeName,
             address: req.body.placeAddress,
             cityId: req.body.cityId,
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
             images: req.files
         };
 
